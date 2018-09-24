@@ -15,12 +15,12 @@ export default {
   define: {
     REACT_APP_URI_API: process.env.NODE_ENV === 'production'
                        ? process.env.REACT_APP_URI_API
-                       : (process.env.NODE_ENV === 'production'
+                       : (process.env.NODE_ENV === 'testing'
                            ? 'http://localhost:8000'
                            : ''),
     REACT_APP_DRIVER_API: process.env.NODE_ENV === 'production'
                        ? process.env.REACT_APP_DRIVER_API
-                       : (process.env.NODE_ENV === 'production'
+                       : (process.env.NODE_ENV === 'testing'
                            ? 'http://localhost:8000'
                            : ''),
   },
