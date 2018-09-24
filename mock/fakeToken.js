@@ -1,0 +1,1 @@
+export const fakeToken = () => {return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzcxOTAzMTAsInN1YiI6ImFjY3Q6dGVzdEBvYnAuY29tIiwiZXhwIjoxNTM3Nzk1MTEwfQ.7f0hrhvFlH6OyaUXNFIjKfYFPvEm-zBgGTHbHecdpXw"};

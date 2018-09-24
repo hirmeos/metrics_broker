@@ -1,0 +1,23 @@
+version: "3.5"
+
+services:
+  metrics_broker:
+    build: ./
+    container_name: "metrics_broker"
+    volumes:
+      - ./src:/usr/src/app/src
+      - ./config:/usr/src/app/config
+      - ./mock:/usr/src/app/mock
+    env_file:
+      - ./var.env
+    networks:
+      statistics_collection:
+        ipv4_address: 172.21.0.5
+
+volumes:
+  dist:
+
+networks:
+  statistics_collection:
+    external: true
+    name: statistics

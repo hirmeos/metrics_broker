@@ -1,0 +1,68 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../utils/utils.less';
+
+.searchBox {
+  width: 522px;
+  margin-top: 20px;
+  clear: both;
+}
+a.listItemMetaTitle {
+  color: @heading-color;
+}
+.listItemExtra {
+  width: 272px;
+  height: 1px;
+}
+.selfTrigger {
+  margin-left: 12px;
+}
+.customFilterDropdown {
+  padding: 8px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
+}
+.customFilterDropdown input {
+  width: 130px;
+  margin-right: 8px;
+}
+.customFilterDropdown button {
+  margin-right: 8px;
+}
+.highlight {
+  background-color: #FFE600;
+}
+
+@media screen and (max-width: @screen-xs) {
+  .selfTrigger {
+    display: block;
+    margin-left: 0;
+  }
+  .listCard {
+    :global {
+      .ant-card-head-title {
+        overflow: visible;
+      }
+    }
+  }
+}
+@media screen and (max-width: @screen-md) {
+  .selfTrigger {
+    display: block;
+    margin-left: 0;
+  }
+}
+@media screen and (max-width: @screen-lg) {
+  .listItemExtra {
+    width: 0;
+    height: 1px;
+  }
+  .listCard {
+    :global {
+      .ant-radio-group {
+        display: block;
+        margin-bottom: 8px;
+      }
+    }
+  }
+}
