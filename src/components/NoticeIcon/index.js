@@ -17,9 +17,10 @@ export default class NoticeIcon extends PureComponent {
     loading: false,
     locale: {
       emptyText: 'Empty',
-      clear: 'Clear ',
+      clear: 'Clear '
     },
-    emptyImage: 'https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg',
+    emptyImage:
+      'https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg'
   };
 
   constructor(props) {
@@ -48,9 +49,13 @@ export default class NoticeIcon extends PureComponent {
     }
     const panes = React.Children.map(children, child => {
       const title =
-        child.props.list && child.props.list.length > 0
-          ? (<div>{child.props.title} ({child.props.list.length})</div>)
-          : child.props.title;
+        child.props.list && child.props.list.length > 0 ? (
+          <div>
+            {child.props.title} ({child.props.list.length})
+          </div>
+        ) : (
+          child.props.title
+        );
       return (
         <TabPane tab={title} key={child.props.title}>
           <List
@@ -74,7 +79,13 @@ export default class NoticeIcon extends PureComponent {
   }
 
   render() {
-    const { className, count, popupAlign, onPopupVisibleChange, popupVisible } = this.props;
+    const {
+      className,
+      count,
+      popupAlign,
+      onPopupVisibleChange,
+      popupVisible
+    } = this.props;
     const noticeButtonClass = classNames(className, styles.noticeButton);
     const notificationBox = this.getNotificationBox();
     const trigger = (

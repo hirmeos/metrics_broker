@@ -3,42 +3,50 @@ import webpackplugin from './plugin.config';
 import defaultSettings from '../src/defaultSettings';
 
 export default {
-  plugins: [[
-    'umi-plugin-react',
-    {
-      antd: true,
-      dva: {
-        hmr: true,
-      },
-      locale: {
-        enable: true,
-        default: 'en-GB',
-        baseNavigator: true,
-      },
-      dynamicImport: {
-        loadingComponent: './components/PageLoading/index',
-      },
-    }
-  ]],
+  plugins: [
+    [
+      'umi-plugin-react',
+      {
+        antd: true,
+        dva: {
+          hmr: true
+        },
+        locale: {
+          enable: true,
+          default: 'en-GB',
+          baseNavigator: true
+        },
+        dynamicImport: {
+          loadingComponent: './components/PageLoading/index'
+        }
+      }
+    ]
+  ],
   externals: {
-    rollbar: 'rollbar',
+    rollbar: 'rollbar'
   },
   define: {
-    APP_TYPE: process.env.APP_TYPE || '',
-    REACT_APP_URI_API: process.env.NODE_ENV === 'production'
-                       ? process.env.REACT_APP_URI_API
-                       : '',
-    REACT_APP_DRIVER_API: process.env.NODE_ENV === 'production'
-                       ? process.env.REACT_APP_DRIVER_API
-                       : '',
+    NODE_ENV: process.env.NODE_ENV,
+    REACT_APP_URI_API:
+      process.env.NODE_ENV === 'production'
+        ? process.env.REACT_APP_URI_API
+        : process.env.NODE_ENV === 'testing'
+          ? 'http://localhost:8000'
+          : '',
+    REACT_APP_DRIVER_API:
+      process.env.NODE_ENV === 'production'
+        ? process.env.REACT_APP_DRIVER_API
+        : process.env.NODE_ENV === 'testing'
+          ? 'http://localhost:8000'
+          : ''
   },
   routes: pageRoutes,
   ignoreMomentLocale: true,
   theme: {
-    'primary-color': defaultSettings.primaryColor,
+    'primary-color': defaultSettings.primaryColor
   },
   lessLoaderOptions: {
-    javascriptEnabled: true,
+    javascriptEnabled: true
   },
   cssLoaderOptions: {
     modules: true,
@@ -60,6 +68,7 @@ export default {
         return `antd-pro${arr.join('-')}-${localName}`.replace(/--/g, '-');
       }
       return localName;
-    },
+    }
   },
+  chainWebpack: webpackplugin
 };

@@ -6,12 +6,10 @@ import styles from './NoticeList.less';
 
 export default function NoticeList({
   data = [],
-  onClick,
-  title,
   locale,
   emptyText,
   emptyImage,
-  genericIcon,
+  genericIcon
 }) {
   if (data.length === 0) {
     return (
@@ -24,20 +22,21 @@ export default function NoticeList({
   return (
     <div>
       <List className={styles.list}>
-        {data.map((item, i) => {
+        {data.map(item => {
           const itemCls = classNames(styles.item, {
-            [styles.read]: item.read,
+            [styles.read]: item.read
           });
           return (
             <List.Item className={itemCls} key={item.UUID}>
               <List.Item.Meta
                 className={styles.meta}
-                avatar={<Avatar className={styles.icon} src={item.icon ? item.icon : genericIcon} />}
-                title={
-                  <div className={styles.title}>
-                    {item.name}
-                  </div>
+                avatar={
+                  <Avatar
+                    className={styles.icon}
+                    src={item.icon ? item.icon : genericIcon}
+                  />
                 }
+                title={<div className={styles.title}>{item.name}</div>}
                 description={
                   <div>
                     <div className={styles.description} title={item.message}>

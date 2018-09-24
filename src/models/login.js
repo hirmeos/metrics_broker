@@ -9,7 +9,7 @@ export default {
   namespace: 'login',
 
   state: {
-    status: undefined,
+    status: undefined
   },
 
   effects: {
@@ -17,7 +17,7 @@ export default {
       const response = yield call(login, payload);
       yield put({
         type: 'changeLoginStatus',
-        payload: response,
+        payload: response
       });
       // Login successfully
       if (response !== undefined && response.status === 'ok') {
@@ -39,46 +39,44 @@ export default {
         }
         yield put(routerRedux.replace(redirect || '/'));
       }
-      return;
     },
     *logout(_, { put }) {
       yield put({
         type: 'changeLoginStatus',
         payload: {
-          data: [{
-            status: false,
-            currentAuthority: 'guest',
-        }]},
+          data: [
+            {
+              status: false,
+              currentAuthority: 'guest'
+            }
+          ]
+        }
       });
       reloadAuthorized();
       yield put(
         routerRedux.push({
           pathname: '/login',
           search: stringify({
-            redirect: window.location.href,
-          }),
+            redirect: window.location.href
+          })
         })
       );
-    },
+    }
   },
 
   reducers: {
     changeLoginStatus(state, { payload }) {
       const data = payload.data[0];
-      const name = data.name;
-      const surname = data.surname;
-      const token = data.token;
-      const authority = data.authority;
 
-      setName(name);
-      setSurname(surname);
-      setToken(token);
-      setAuthority(authority);
+      setName(data.name);
+      setSurname(data.surname);
+      setToken(data.token);
+      setAuthority(data.authority);
 
       return {
         ...state,
-        status: authority,
+        status: data.authority
       };
-    },
-  },
+    }
+  }
 };

@@ -16,7 +16,7 @@ export default class LoginTab extends Component {
   static __ANT_PRO_LOGIN_TAB = true;
 
   static contextTypes = {
-    tabUtil: PropTypes.object,
+    tabUtil: PropTypes.object
   };
 
   constructor(props) {

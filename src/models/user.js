@@ -5,7 +5,7 @@ export default {
 
   state: {
     list: [],
-    currentUser: {},
+    currentUser: {}
   },
 
   effects: {
@@ -13,23 +13,23 @@ export default {
       const response = yield call(queryCurrent, payload);
       yield put({
         type: 'saveCurrentUser',
-        payload: Array.isArray(response.data) ? response.data[0]: [],
+        payload: Array.isArray(response.data) ? response.data[0] : []
       });
-    },
+    }
   },
 
   reducers: {
     save(state, action) {
       return {
         ...state,
-        list: action.payload,
+        list: action.payload
       };
     },
     saveCurrentUser(state, action) {
       return {
         ...state,
-        currentUser: action.payload || {},
+        currentUser: action.payload || {}
       };
-    },
-  },
+    }
+  }
 };

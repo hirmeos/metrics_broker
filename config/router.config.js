@@ -2,9 +2,7 @@ export default [
   {
     path: '/login',
     component: '../layouts/UserLayout',
-    routes: [
-      { path: '/login', component: './User/Login' },
-    ],
+    routes: [{ path: '/login', component: './User/Login' }]
   },
   {
     path: '/',
@@ -18,7 +16,7 @@ export default [
         name: 'dashboard',
         icon: 'dashboard',
         authority: 'admin',
-        component: './Driver/Driver',
+        component: './Driver/Driver'
       },
       {
         path: '/publications',
@@ -28,20 +26,20 @@ export default [
           {
             path: '/publications/add',
             name: 'add',
-            component: './Publication/AdvancedForm',
+            component: './Publication/PublicationForm'
           },
           {
             path: '/publications/edit/:id',
             name: 'edit',
             hideInMenu: true,
-            component: './Publication/AdvancedForm',
+            component: './Publication/PublicationForm'
           },
           {
             path: '/publications/list',
             name: 'list',
-            component: './Publication/List',
-          },
-        ],
+            component: './Publication/List'
+          }
+        ]
       },
       {
         path: '/exception',
@@ -53,7 +51,7 @@ export default [
             path: '/exception/403',
             name: 'not-allowed',
             hideInMenu: true,
-            component: './Exception/403',
+            component: './Exception/403'
           },
           {
             path: '/exception/404',
@@ -65,13 +63,13 @@ export default [
             path: '/exception/500',
             name: 'server-error',
             hideInMenu: true,
-            component: './Exception/500',
-          },
-        ],
+            component: './Exception/500'
+          }
+        ]
       },
       {
-        component: '404',
-      },
-    ],
-  },
+        component: '404'
+      }
+    ]
+  }
 ];

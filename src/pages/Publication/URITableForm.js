@@ -1,5 +1,13 @@
 import React, { PureComponent, Fragment } from 'react';
-import { Table, Button, Input, message, Popconfirm, Divider, Checkbox } from 'antd';
+import {
+  Table,
+  Button,
+  Input,
+  message,
+  Popconfirm,
+  Divider,
+  Checkbox
+} from 'antd';
 import styles from './style.less';
 
 export default class URITableForm extends PureComponent {
@@ -12,14 +20,14 @@ export default class URITableForm extends PureComponent {
 
     this.state = {
       data: props.value,
-      loading: false,
+      loading: false
     };
   }
 
   componentWillReceiveProps(nextProps) {
     if ('value' in nextProps) {
       this.setState({
-        data: nextProps.value,
+        data: nextProps.value
       });
     }
   }
@@ -31,13 +39,7 @@ export default class URITableForm extends PureComponent {
 
   getIndexByKey(key, newData) {
     const { data } = this.state;
-    let index = null;
-    (newData || data).map((item, k) => {
-      if (item.key === key) {
-        index = k;
-      }
-    });
-    return index;
+    return (newData || data).indexOf(this.getRowByKey(key, newData));
   }
 
   toggleEditable = (e, key) => {
@@ -63,7 +65,7 @@ export default class URITableForm extends PureComponent {
       title: '',
       canonical: false,
       editable: true,
-      isNew: true,
+      isNew: true
     });
     this.index += 1;
     this.setState({ data: newData });
@@ -88,8 +90,8 @@ export default class URITableForm extends PureComponent {
     const newData = data.map(item => ({ ...item }));
     const target = this.getRowByKey(key, newData);
     if (target) {
-      target[fieldName] = fieldName === 'canonical'
-        ? e.target.checked : e.target.value;
+      target[fieldName] =
+        fieldName === 'canonical' ? e.target.checked : e.target.value;
       this.setState({ data: newData });
     }
   }
@@ -97,7 +99,7 @@ export default class URITableForm extends PureComponent {
   saveRow(e, key) {
     e.persist();
     this.setState({
-      loading: true,
+      loading: true
     });
     setTimeout(() => {
       if (this.clickedCancel) {
@@ -109,7 +111,7 @@ export default class URITableForm extends PureComponent {
         message.error('Please complete the titles section');
         e.target.focus();
         this.setState({
-          loading: false,
+          loading: false
         });
         return;
       }
@@ -119,7 +121,7 @@ export default class URITableForm extends PureComponent {
       delete target.isNew;
       onChange(data);
       this.setState({
-        loading: false,
+        loading: false
       });
     }, 500);
   }
@@ -159,7 +161,7 @@ export default class URITableForm extends PureComponent {
             );
           }
           return text;
-        },
+        }
       },
       {
         title: 'Canonical',
@@ -170,12 +172,14 @@ export default class URITableForm extends PureComponent {
             return (
               <Checkbox
                 value={value}
-                onChange={e => this.handleFieldChange(e, 'canonical', record.key)}
+                onChange={e =>
+                  this.handleFieldChange(e, 'canonical', record.key)
+                }
               />
             );
           }
-          return value ? "Yes" : "No";
-        },
+          return value ? 'Yes' : 'No';
+        }
       },
       {
         title: 'Actions',
@@ -191,7 +195,10 @@ export default class URITableForm extends PureComponent {
                 <span>
                   <a onClick={e => this.saveRow(e, record.key)}>Save</a>
                   <Divider type="vertical" />
-                  <Popconfirm title="Are you sure you want to delete this title?" onConfirm={() => this.remove(record.key)}>
+                  <Popconfirm
+                    title="Are you sure you want to delete this title?"
+                    onConfirm={() => this.remove(record.key)}
+                  >
                     <a>Delete</a>
                   </Popconfirm>
                 </span>
@@ -209,13 +216,16 @@ export default class URITableForm extends PureComponent {
             <span>
               <a onClick={e => this.toggleEditable(e, record.key)}>Edit</a>
               <Divider type="vertical" />
-              <Popconfirm title="Are you sure you want to delete this entry?？" onConfirm={() => this.remove(record.key)}>
+              <Popconfirm
+                title="Are you sure you want to delete this entry?？"
+                onConfirm={() => this.remove(record.key)}
+              >
                 <a>Delete</a>
               </Popconfirm>
             </span>
           );
-        },
-      },
+        }
+      }
     ];
 
     const { loading, data } = this.state;

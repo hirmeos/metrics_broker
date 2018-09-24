@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
-import { Layout, message } from 'antd';
+import { Layout } from 'antd';
 import Animate from 'rc-animate';
 import { connect } from 'dva';
-import router from 'umi/router';
 import GlobalHeader from '@/components/GlobalHeader';
 import styles from './Header.less';
 
@@ -10,13 +9,13 @@ const { Header } = Layout;
 
 class HeaderView extends PureComponent {
   state = {
-    visible: true,
+    visible: true
   };
 
   static getDerivedStateFromProps(props, state) {
     if (!props.autoHideHeader && !state.visible) {
       return {
-        visible: true,
+        visible: true
       };
     }
     return null;
@@ -43,7 +42,7 @@ class HeaderView extends PureComponent {
     const { dispatch } = this.props;
     if (key === 'logout') {
       dispatch({
-        type: 'login/logout',
+        type: 'login/logout'
       });
     }
   };
@@ -54,24 +53,25 @@ class HeaderView extends PureComponent {
     if (!autoHideHeader) {
       return;
     }
-    const scrollTop = document.body.scrollTop + document.documentElement.scrollTop;
+    const scrollTop =
+      document.body.scrollTop + document.documentElement.scrollTop;
     if (!this.ticking) {
       requestAnimationFrame(() => {
         if (this.oldScrollTop > scrollTop) {
           this.setState({
-            visible: true,
+            visible: true
           });
           this.scrollTop = scrollTop;
           return;
         }
         if (scrollTop > 300 && visible) {
           this.setState({
-            visible: false,
+            visible: false
           });
         }
         if (scrollTop < 300 && !visible) {
           this.setState({
-            visible: true,
+            visible: true
           });
         }
         this.oldScrollTop = scrollTop;
@@ -82,12 +82,15 @@ class HeaderView extends PureComponent {
   };
 
   render() {
-    const { isMobile, handleMenuCollapse, setting } = this.props;
-    const { navTheme, layout, fixedHeader } = setting;
+    const { handleMenuCollapse, setting } = this.props;
+    const { fixedHeader } = setting;
     const { visible } = this.state;
     const width = this.getHeadWidth();
     const HeaderDom = visible ? (
-      <Header style={{ padding: 0, width }} className={fixedHeader ? styles.fixedHeader : ''}>
+      <Header
+        style={{ padding: 0, width }}
+        className={fixedHeader ? styles.fixedHeader : ''}
+      >
         <GlobalHeader
           onCollapse={handleMenuCollapse}
           onNoticeClear={this.handleNoticeClear}
@@ -109,5 +112,5 @@ export default connect(({ user, global, driver, setting, loading }) => ({
   collapsed: global.collapsed,
   fetchingDrivers: loading.effects['driver/fetch'],
   drivers: driver.driver,
-  setting,
+  setting
 }))(HeaderView);

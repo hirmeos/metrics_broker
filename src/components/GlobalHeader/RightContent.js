@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { FormattedMessage } from 'umi/locale';
-import { Spin, Tag, Menu, Icon, Dropdown, Avatar, Tooltip, Button } from 'antd';
+import { Spin, Tag, Menu, Icon, Dropdown, Tooltip } from 'antd';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import NoticeIcon from '../NoticeIcon';
@@ -26,7 +26,7 @@ export default class GlobalHeaderRight extends PureComponent {
           todo: '',
           processing: 'blue',
           urgent: 'red',
-          doing: 'gold',
+          doing: 'gold'
         }[newNotice.status];
         newNotice.extra = (
           <Tag color={color} style={{ marginRight: 0 }}>
@@ -44,25 +44,27 @@ export default class GlobalHeaderRight extends PureComponent {
       currentUser,
       fetchingDrivers,
       drivers = [],
-      onNoticeVisibleChange,
       onMenuClick,
-      onNoticeClear,
-      theme,
+      theme
     } = this.props;
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
         <Menu.Item key="logout">
-          <Icon type="logout" /><FormattedMessage id='navbar.logout' />
+          <Icon type="logout" />
+          <FormattedMessage id="navbar.logout" />
         </Menu.Item>
       </Menu>
     );
     const noticeData = drivers;
     const errorData = noticeData.filter(
-      (driver) => driver.event.status === "error");
+      driver => driver.event.status === 'error'
+    );
     const successData = noticeData.filter(
-      (driver) => driver.event.status === "success");
+      driver => driver.event.status === 'success'
+    );
     const pendingData = noticeData.filter(
-      (driver) => driver.event.status === "running");
+      driver => driver.event.status === 'running'
+    );
 
     let className = styles.right;
     if (theme === 'dark') {
@@ -81,37 +83,37 @@ export default class GlobalHeaderRight extends PureComponent {
             <Icon type="question-circle-o" />
           </a>
         </Tooltip>
-          <NoticeIcon
-            className={styles.action}
-            count={errorData.length}
-            onItemClick={(item, tabProps) => {
-              console.log(item, tabProps); // eslint-disable-line
-            }}
-            loading={fetchingDrivers}
-            popupAlign={{ offset: [20, -16] }}
-          >
-            <NoticeIcon.Tab
-              list={errorData}
-              title={<FormattedMessage id="driver.notice.tab.error" />}
-              emptyText={<FormattedMessage id="driver.notice.empty.error" />}
-              emptyImage={bellIcon}
-              genericIcon={genericDriverIcon}
-            />
-            <NoticeIcon.Tab
-              list={pendingData}
-              title={<FormattedMessage id="driver.notice.tab.running" />}
-              emptyText={<FormattedMessage id="driver.notice.empty.running" />}
-              emptyImage={bellIcon}
-              genericIcon={genericDriverIcon}
-            />
-            <NoticeIcon.Tab
-              list={successData}
-              title={<FormattedMessage id="driver.notice.tab.success" />}
-              emptyText={<FormattedMessage id="driver.notice.empty.success" />}
-              emptyImage={bellIcon}
-              genericIcon={genericDriverIcon}
-            />
-          </NoticeIcon>
+        <NoticeIcon
+          className={styles.action}
+          count={errorData.length}
+          onItemClick={(item, tabProps) => {
+            console.log(item, tabProps); // eslint-disable-line
+          }}
+          loading={fetchingDrivers}
+          popupAlign={{ offset: [20, -16] }}
+        >
+          <NoticeIcon.Tab
+            list={errorData}
+            title={<FormattedMessage id="driver.notice.tab.error" />}
+            emptyText={<FormattedMessage id="driver.notice.empty.error" />}
+            emptyImage={bellIcon}
+            genericIcon={genericDriverIcon}
+          />
+          <NoticeIcon.Tab
+            list={pendingData}
+            title={<FormattedMessage id="driver.notice.tab.running" />}
+            emptyText={<FormattedMessage id="driver.notice.empty.running" />}
+            emptyImage={bellIcon}
+            genericIcon={genericDriverIcon}
+          />
+          <NoticeIcon.Tab
+            list={successData}
+            title={<FormattedMessage id="driver.notice.tab.success" />}
+            emptyText={<FormattedMessage id="driver.notice.empty.success" />}
+            emptyImage={bellIcon}
+            genericIcon={genericDriverIcon}
+          />
+        </NoticeIcon>
         {currentUser.name && currentUser.surname ? (
           <Dropdown overlay={menu}>
             <span className={`${styles.action} ${styles.account}`}>

@@ -12,20 +12,20 @@ class Login extends Component {
     className: PropTypes.string,
     defaultActiveKey: PropTypes.string,
     onTabChange: PropTypes.func,
-    onSubmit: PropTypes.func,
+    onSubmit: PropTypes.func
   };
 
   static childContextTypes = {
     tabUtil: PropTypes.object,
     form: PropTypes.object,
-    updateActive: PropTypes.func,
+    updateActive: PropTypes.func
   };
 
   static defaultProps = {
     className: '',
     defaultActiveKey: '',
     onTabChange: () => {},
-    onSubmit: () => {},
+    onSubmit: () => {}
   };
 
   constructor(props) {
@@ -33,7 +33,7 @@ class Login extends Component {
     this.state = {
       type: props.defaultActiveKey,
       tabs: [],
-      active: {},
+      active: {}
     };
   }
 
@@ -44,14 +44,14 @@ class Login extends Component {
       tabUtil: {
         addTab: id => {
           this.setState({
-            tabs: [...tabs, id],
+            tabs: [...tabs, id]
           });
         },
         removeTab: id => {
           this.setState({
-            tabs: tabs.filter(currentId => currentId !== id),
+            tabs: tabs.filter(currentId => currentId !== id)
           });
-        },
+        }
       },
       form,
       updateActive: activeItem => {
@@ -62,16 +62,16 @@ class Login extends Component {
           active[type] = [activeItem];
         }
         this.setState({
-          active,
+          active
         });
-      },
+      }
     };
   }
 
   onSwitch = type => {
     const { onTabChange } = this.props;
     this.setState({
-      type,
+      type
     });
     onTabChange(type);
   };

@@ -1,13 +1,18 @@
 module.exports = {
   parser: 'babel-eslint',
-  extends: ['airbnb', 'prettier'],
+  extends: ['airbnb', 'prettier', 'plugin:compat/recommended'],
   env: {
     browser: true,
     node: true,
     es6: true,
     mocha: true,
     jest: true,
-    jasmine: true,
+    jasmine: true
+  },
+  globals: {
+    NODE_ENV: true,
+    REACT_APP_URI_API: true,
+    REACT_APP_DRIVER_API: true
   },
   rules: {
     'generator-star-spacing': [0],
@@ -29,8 +34,8 @@ module.exports = {
         arrow: 'parens-new-line',
         condition: 'parens-new-line',
         logical: 'parens-new-line',
-        prop: 'ignore',
-      },
+        prop: 'ignore'
+      }
     ],
     'no-else-return': [0],
     'no-restricted-syntax': [0],
@@ -49,24 +54,24 @@ module.exports = {
     'comma-dangle': [
       'error',
       {
-        arrays: 'always-multiline',
-        objects: 'always-multiline',
-        imports: 'always-multiline',
-        exports: 'always-multiline',
-        functions: 'ignore',
-      },
+        arrays: 'never',
+        objects: 'never',
+        imports: 'never',
+        exports: 'never',
+        functions: 'ignore'
+      }
     ],
     'object-curly-newline': [0],
     'function-paren-newline': [0],
     'no-restricted-globals': [0],
-    'require-yield': [1],
+    'require-yield': [1]
   },
   parserOptions: {
     ecmaFeatures: {
-      experimentalObjectRestSpread: true,
-    },
+      experimentalObjectRestSpread: true
+    }
   },
   settings: {
-    polyfills: ['fetch', 'promises'],
-  },
+    polyfills: ['fetch', 'promises', 'url']
+  }
 };

@@ -1,15 +1,5 @@
 import React, { PureComponent } from 'react';
-import {
-  Card,
-  Button,
-  Form,
-  Icon,
-  Col,
-  Row,
-  Input,
-  Select,
-  Popover,
-} from 'antd';
+import { Card, Button, Form, Icon, Select, Popover } from 'antd';
 import { connect } from 'dva';
 import FooterToolbar from '@/components/FooterToolbar';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
@@ -22,37 +12,35 @@ const { Option } = Select;
 const fieldLabels = {
   title: 'Publication title',
   type: 'Publication type',
-  uri: 'Publication URIs',
+  uri: 'Publication URIs'
 };
 
 const fieldRules = {
   title: [{ required: true, message: 'Please enter at least one title' }],
   type: [{ required: true, message: 'Please choose a publication type' }],
   uri: [{ required: true, message: 'Please enter at least one URI' }]
-}
+};
 
 @connect(({ workType, loading }) => ({
   workType,
-  loading: loading.models.workType,
-  submitting: loading.effects['publication/submitAddForm'],
+  submitting: loading.effects['publication/submitAddForm']
 }))
 @Form.create()
-export default class AdvancedForm extends PureComponent {
+class AddPublicationForm extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
       type: 'workType/fetch',
       payload: {
         sort: 'work_type',
-        order: 'asc',
-      },
+        order: 'asc'
+      }
     });
   }
 
   render() {
     const {
       workType: { workType },
-      loading,
       form,
       dispatch,
       submitting
@@ -64,8 +52,8 @@ export default class AdvancedForm extends PureComponent {
         if (!error) {
           // submit the values
           dispatch({
-            type: 'form/submitAdvancedForm',
-            payload: values,
+            type: 'form/submitAddForm',
+            payload: values
           });
         }
       });
@@ -87,7 +75,11 @@ export default class AdvancedForm extends PureComponent {
           return null;
         }
         return (
-          <li key={key} className={styles.errorListItem} onClick={() => scrollToField(key)}>
+          <li
+            key={key}
+            className={styles.errorListItem}
+            onClick={() => scrollToField(key)}
+          >
             <Icon type="cross-circle-o" className={styles.errorIcon} />
             <div className={styles.errorMessage}>{errors[key][0]}</div>
             <div className={styles.errorField}>{fieldLabels[key]}</div>
@@ -110,16 +102,16 @@ export default class AdvancedForm extends PureComponent {
       );
     };
     const typeSelect = getFieldDecorator('type', {
-            rules: fieldRules.type,
-          })(
-            <Select placeholder="Please choose publication type">
-              {workType.map(type => (
-                <Option key={type.work_type} value={type.work_type}>
-                  {type.work_type}
-                </Option>
-              ))}
-            </Select>
-          );
+      rules: fieldRules.type
+    })(
+      <Select placeholder="Please choose publication type">
+        {workType.map(type => (
+          <Option key={type.work_type} value={type.work_type}>
+            {type.work_type}
+          </Option>
+        ))}
+      </Select>
+    );
 
     return (
       <PageHeaderLayout
@@ -129,25 +121,23 @@ export default class AdvancedForm extends PureComponent {
       >
         <Card className={styles.card} bordered={false}>
           <Form layout="vertical">
-                <Form.Item label={fieldLabels.type}>
-                  {typeSelect}
-                </Form.Item>
+            <Form.Item label={fieldLabels.type}>{typeSelect}</Form.Item>
           </Form>
         </Card>
         <Card className={styles.card} bordered={false}>
           <Form.Item label={fieldLabels.title}>
             {getFieldDecorator('title', {
-            rules: fieldRules.title,
-              initialValue: [],
+              rules: fieldRules.title,
+              initialValue: []
             })(<TitleTableForm />)}
           </Form.Item>
         </Card>
         <Card className={styles.card} bordered={false}>
           <Form.Item label={fieldLabels.uri}>
-          {getFieldDecorator('uri', {
-            rules: fieldRules.uri,
-            initialValue: [],
-          })(<URITableForm />)}
+            {getFieldDecorator('uri', {
+              rules: fieldRules.uri,
+              initialValue: []
+            })(<URITableForm />)}
           </Form.Item>
         </Card>
         <FooterToolbar>
@@ -160,3 +150,5 @@ export default class AdvancedForm extends PureComponent {
     );
   }
 }
+
+export default AddPublicationForm;
