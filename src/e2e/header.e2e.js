@@ -14,7 +14,7 @@ describe('Header', () => {
   beforeEach(async () => {
     page = await browser.newPage();
     await page.goto(startUrl, { waitUntil: 'networkidle2' });
-    await page.evaluate((t) => {
+    await page.evaluate(t => {
       window.localStorage.setItem('metrics-broker-token', t);
     }, token);
     await page.evaluate(() =>
@@ -26,9 +26,7 @@ describe('Header', () => {
   afterEach(() => page.close());
 
   it('should render user name', async () => {
-    await page.waitForSelector(
-      '.antd-pro-components-global-header-index-account'
-    );
+    await page.waitForSelector('#header-user-name');
     const text = await page.evaluate(() => document.body.innerHTML);
     expect(text).toContain('>Test User</span>');
   });
