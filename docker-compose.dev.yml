@@ -2,7 +2,9 @@ version: "3.5"
 
 services:
   metrics_broker:
-    build: ./
+    build:
+      context: ./
+      dockerfile: Dockerfile.dev
     container_name: "metrics_broker"
     volumes:
       - ./src:/usr/src/app/src
