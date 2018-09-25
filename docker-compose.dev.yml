@@ -12,14 +12,3 @@ services:
       - ./mock:/usr/src/app/mock
     env_file:
       - ./var.env
-    networks:
-      statistics_collection:
-        ipv4_address: 172.21.0.5
-
-volumes:
-  dist:
-
-networks:
-  statistics_collection:
-    external: true
-    name: statistics
