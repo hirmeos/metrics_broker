@@ -117,7 +117,7 @@ export default class GlobalHeaderRight extends PureComponent {
         {currentUser.name && currentUser.surname ? (
           <Dropdown overlay={menu}>
             <span className={`${styles.action} ${styles.account}`}>
-              <span className={styles.name}>
+              <span id="header-user-name" className={styles.name}>
                 {currentUser.name} {currentUser.surname}
               </span>
             </span>

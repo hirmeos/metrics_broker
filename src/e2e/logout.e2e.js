@@ -14,7 +14,7 @@ describe('Logout', () => {
   beforeEach(async () => {
     page = await browser.newPage();
     await page.goto(startUrl, { waitUntil: 'networkidle2' });
-    await page.evaluate((t) => {
+    await page.evaluate(t => {
       window.localStorage.setItem('metrics-broker-token', t);
     }, token);
     await page.evaluate(() =>
@@ -26,10 +26,8 @@ describe('Logout', () => {
   afterEach(() => page.close());
 
   it('should logout', async () => {
-    await page.waitForSelector(
-      '.antd-pro-components-global-header-index-account'
-    );
-    await page.hover('.antd-pro-components-global-header-index-account');
+    await page.waitForSelector('#header-user-name');
+    await page.hover('#header-user-name');
     await page.waitForSelector('.anticon-logout');
     await page.click('.anticon-logout');
     const storedToken = await page.evaluate(() =>
@@ -39,10 +37,8 @@ describe('Logout', () => {
   });
 
   it('should redirect to login', async () => {
-    await page.waitForSelector(
-      '.antd-pro-components-global-header-index-account'
-    );
-    await page.hover('.antd-pro-components-global-header-index-account');
+    await page.waitForSelector('#header-user-name');
+    await page.hover('#header-user-name');
     await page.waitForSelector('.anticon-logout');
     await page.click('.anticon-logout');
     await page.waitForSelector('#email');
