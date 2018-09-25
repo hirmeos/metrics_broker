@@ -40,8 +40,6 @@ export default class TitleTableForm extends PureComponent {
     const newData = data.map(item => ({ ...item }));
     const target = this.getRowByKey(key, newData);
     const index = this.getIndexByKey(key, newData);
-    console.log(newData);
-    console.log(index);
     if (target) {
       if (!target.editable) {
         this.cacheOriginData[key] = { ...target };

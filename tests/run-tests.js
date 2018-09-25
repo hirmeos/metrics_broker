@@ -5,9 +5,13 @@ const env = Object.create(process.env);
 env.BROWSER = 'none';
 env.TEST = true;
 env.NODE_ENV = 'testing';
-const startServer = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['start'], {
-  env,
-});
+const startServer = spawn(
+  /^win/.test(process.platform) ? 'npm.cmd' : 'npm',
+  ['start'],
+  {
+    env
+  }
+);
 
 startServer.stderr.on('data', data => {
   // eslint-disable-next-line
@@ -26,9 +30,13 @@ startServer.stdout.on('data', data => {
   if (data.toString().indexOf('App running at') >= 0) {
     // eslint-disable-next-line
     console.log('Development server has started, ready to run tests.');
-    const testCmd = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['test'], {
-      stdio: 'inherit',
-    });
+    const testCmd = spawn(
+      /^win/.test(process.platform) ? 'npm.cmd' : 'npm',
+      ['test'],
+      {
+        stdio: 'inherit'
+      }
+    );
     testCmd.on('exit', code => {
       startServer.kill();
       process.exit(code);
