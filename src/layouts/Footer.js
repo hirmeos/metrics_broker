@@ -9,10 +9,14 @@ const FooterView = () => (
       links={[
         {
           key: 'github',
-          title: <Fragment><Icon type="github" /> Metrics Broker</Fragment>,
+          title: (
+            <Fragment>
+              <Icon type="github" /> Metrics Broker
+            </Fragment>
+          ),
           href: 'https://github.com/hirmeos',
-          blankTarget: true,
-        },
+          blankTarget: true
+        }
       ]}
       copyright={
         <Fragment>

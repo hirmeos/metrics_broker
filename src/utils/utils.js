@@ -42,7 +42,11 @@ export function getTimeDistance(type) {
 
     return [
       moment(`${year}-${fixedZero(month + 1)}-01 00:00:00`),
-      moment(moment(`${nextYear}-${fixedZero(nextMonth + 1)}-01 00:00:00`).valueOf() - 1000),
+      moment(
+        moment(
+          `${nextYear}-${fixedZero(nextMonth + 1)}-01 00:00:00`
+        ).valueOf() - 1000
+      )
     ];
   }
 
@@ -114,12 +118,14 @@ export function getRoutes(path, routerData) {
   const renderArr = getRenderArr(routes);
   // Conversion and stitching parameters
   const renderRoutes = renderArr.map(item => {
-    const exact = !routes.some(route => route !== item && getRelation(route, item) === 1);
+    const exact = !routes.some(
+      route => route !== item && getRelation(route, item) === 1
+    );
     return {
       exact,
       ...routerData[`${path}${item}`],
       key: `${path}${item}`,
-      path: `${path}${item}`,
+      path: `${path}${item}`
     };
   });
   return renderRoutes;

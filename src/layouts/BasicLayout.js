@@ -11,7 +11,6 @@ import { enquireScreen, unenquireScreen } from 'enquire-js';
 import { formatMessage } from 'umi/locale';
 import SiderMenu from '@/components/SiderMenu';
 import Authorized from '@/utils/Authorized';
-import SettingDrawer from '@/components/SettingDrawer';
 import logo from '../assets/logo.svg';
 import Footer from './Footer';
 import Header from './Header';
@@ -35,10 +34,15 @@ function formatter(data, parentPath = '', parentAuthority, parentName) {
     const result = {
       ...item,
       locale,
-      authority: item.authority || parentAuthority,
+      authority: item.authority || parentAuthority
     };
     if (item.routes) {
-      const children = formatter(item.routes, `${parentPath}${item.path}/`, item.authority, locale);
+      const children = formatter(
+        item.routes,
+        `${parentPath}${item.path}/`,
+        item.authority,
+        locale
+      );
       // Reduce memory usage
       result.children = children;
     }
@@ -49,27 +53,27 @@ function formatter(data, parentPath = '', parentAuthority, parentName) {
 
 const query = {
   'screen-xs': {
-    maxWidth: 575,
+    maxWidth: 575
   },
   'screen-sm': {
     minWidth: 576,
-    maxWidth: 767,
+    maxWidth: 767
   },
   'screen-md': {
     minWidth: 768,
-    maxWidth: 991,
+    maxWidth: 991
   },
   'screen-lg': {
     minWidth: 992,
-    maxWidth: 1199,
+    maxWidth: 1199
   },
   'screen-xl': {
     minWidth: 1200,
-    maxWidth: 1599,
+    maxWidth: 1599
   },
   'screen-xxl': {
-    minWidth: 1600,
-  },
+    minWidth: 1600
+  }
 };
 
 class BasicLayout extends React.PureComponent {
@@ -82,8 +86,7 @@ class BasicLayout extends React.PureComponent {
   }
 
   state = {
-    rendering: true,
-    isMobile: false,
+    isMobile: false
   };
 
   componentDidMount() {
@@ -92,21 +95,16 @@ class BasicLayout extends React.PureComponent {
       type: 'user/fetchCurrent',
       payload: {
         token: getToken()
-      },
+      }
     });
     dispatch({
-      type: 'setting/getSetting',
-    });
-    this.renderRef = requestAnimationFrame(() => {
-      this.setState({
-        rendering: false,
-      });
+      type: 'setting/getSetting'
     });
     this.enquireHandler = enquireScreen(mobile => {
       const { isMobile } = this.state;
       if (isMobile !== mobile) {
         this.setState({
-          isMobile: mobile,
+          isMobile: mobile
         });
       }
     });
@@ -124,7 +122,6 @@ class BasicLayout extends React.PureComponent {
   }
 
   componentWillUnmount() {
-    cancelAnimationFrame(this.renderRef);
     unenquireScreen(this.enquireHandler);
   }
 
@@ -132,13 +129,13 @@ class BasicLayout extends React.PureComponent {
     const { location } = this.props;
     return {
       location,
-      breadcrumbNameMap: this.breadcrumbNameMap,
+      breadcrumbNameMap: this.breadcrumbNameMap
     };
   }
 
   getMenuData() {
     const {
-      route: { routes },
+      route: { routes }
     } = this.props;
     return formatter(routes);
   }
@@ -176,7 +173,7 @@ class BasicLayout extends React.PureComponent {
     }
     const message = formatMessage({
       id: currRouterData.locale || currRouterData.name,
-      defaultMessage: currRouterData.name,
+      defaultMessage: currRouterData.name
     });
     return `${message} - Metrics Broker`;
   };
@@ -186,7 +183,7 @@ class BasicLayout extends React.PureComponent {
     const { fixSiderbar, collapsed, layout } = this.props;
     if (fixSiderbar && layout !== 'topmenu' && !isMobile) {
       return {
-        paddingLeft: collapsed ? '80px' : '256px',
+        paddingLeft: collapsed ? '80px' : '256px'
       };
     }
     return null;
@@ -196,7 +193,7 @@ class BasicLayout extends React.PureComponent {
     const { fixedHeader } = this.props;
     return {
       margin: '24px 24px 0',
-      paddingTop: fixedHeader ? 64 : 0,
+      paddingTop: fixedHeader ? 64 : 0
     };
   };
 
@@ -204,26 +201,16 @@ class BasicLayout extends React.PureComponent {
     const { dispatch } = this.props;
     dispatch({
       type: 'global/changeLayoutCollapsed',
-      payload: collapsed,
+      payload: collapsed
     });
   };
-
-  renderSettingDrawer() {
-    // Do show SettingDrawer in production
-    // unless deployed in preview.pro.ant.design as demo
-    const { rendering } = this.state;
-    if ((rendering || process.env.NODE_ENV === 'production') && APP_TYPE !== 'site') {
-      return null;
-    }
-    return <SettingDrawer />;
-  }
 
   render() {
     const {
       navTheme,
       layout: PropsLayout,
       children,
-      location: { pathname },
+      location: { pathname }
     } = this.props;
     const { isMobile } = this.state;
     const isTop = PropsLayout === 'topmenu';
@@ -245,7 +232,7 @@ class BasicLayout extends React.PureComponent {
         <Layout
           style={{
             ...this.getLayoutStyle(),
-            minHeight: '100vh',
+            minHeight: '100vh'
           }}
         >
           <Header
@@ -256,7 +243,10 @@ class BasicLayout extends React.PureComponent {
             {...this.props}
           />
           <Content style={this.getContentStyle()}>
-            <Authorized authority={routerConfig.authority} noMatch={<Exception403 />}>
+            <Authorized
+              authority={routerConfig.authority}
+              noMatch={<Exception403 />}
+            >
               {children}
             </Authorized>
           </Content>
@@ -275,7 +265,6 @@ class BasicLayout extends React.PureComponent {
             )}
           </ContainerQuery>
         </DocumentTitle>
-        {this.renderSettingDrawer()}
       </React.Fragment>
     );
   }
@@ -284,5 +273,5 @@ class BasicLayout extends React.PureComponent {
 export default connect(({ global, setting }) => ({
   collapsed: global.collapsed,
   layout: setting.layout,
-  ...setting,
+  ...setting
 }))(BasicLayout);

@@ -4,7 +4,7 @@ export default {
   namespace: 'driver',
 
   state: {
-    driver: [],
+    driver: []
   },
 
   effects: {
@@ -12,22 +12,22 @@ export default {
       const response = yield call(driverData);
       yield put({
         type: 'queryList',
-        payload: Array.isArray(response.data) ? response.data: [],
+        payload: Array.isArray(response.data) ? response.data : []
       });
-    },
+    }
   },
 
   reducers: {
     queryList(state, action) {
       return {
         ...state,
-        driver: action.payload,
+        driver: action.payload
       };
     },
     clear() {
       return {
-        driver: [],
+        driver: []
       };
-    },
-  },
+    }
+  }
 };

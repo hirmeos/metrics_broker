@@ -8,7 +8,7 @@ export async function getWorks(params) {
 export async function login(params) {
   return request(`${REACT_APP_URI_API}/auth`, {
     method: 'POST',
-    body: params,
+    body: params
   });
 }
 
@@ -16,10 +16,10 @@ export async function getWorkTypes(params) {
   return request(`${REACT_APP_URI_API}/work_types?${stringify(params)}`);
 }
 
-export async function fakeSubmitForm(params) {
-  return request('/api/forms', {
+export async function addWork(params) {
+  return request(`${REACT_APP_URI_API}/works`, {
     method: 'POST',
-    body: params,
+    body: params
   });
 }
 

@@ -29,4 +29,3 @@ export function getAuthority() {
 export function setAuthority(authority) {
   return localStorage.setItem('metrics-broker-authority', authority);
 }
-

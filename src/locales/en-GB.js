@@ -50,7 +50,8 @@ export default {
   'app.setting.othersettings': 'Other Settings',
   'app.setting.weakmode': 'Weak Mode',
   'app.setting.copy': 'Copy Setting',
-  'app.setting.copyinfo': 'copy success，please replace defaultSettings in src/models/setting.js',
+  'app.setting.copyinfo':
+    'copy success，please replace defaultSettings in src/models/setting.js',
   'app.setting.production.hint':
-    'Setting panel show in development environment only, please mannually modify',
+    'Setting panel show in development environment only, please mannually modify'
 };

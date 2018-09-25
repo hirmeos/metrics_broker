@@ -12,17 +12,17 @@ function generator({ defaultProps, defaultRules, type }) {
     return class BasicComponent extends Component {
       static contextTypes = {
         form: PropTypes.object,
-        updateActive: PropTypes.func,
+        updateActive: PropTypes.func
       };
 
       static defaultProps = {
-        buttonText: 'Get verification code',
+        buttonText: 'Get verification code'
       };
 
       constructor(props) {
         super(props);
         this.state = {
-          count: 0,
+          count: 0
         };
       }
 
@@ -59,7 +59,14 @@ function generator({ defaultProps, defaultRules, type }) {
         const { getFieldDecorator } = form;
         const options = {};
         let otherProps = {};
-        const { onChange, defaultValue, buttonText, rules, name, ...restProps } = this.props;
+        const {
+          onChange,
+          defaultValue,
+          buttonText,
+          rules,
+          name,
+          ...restProps
+        } = this.props;
         const { count } = this.state;
         options.rules = rules || defaultRules;
         if (onChange) {
@@ -110,7 +117,7 @@ Object.keys(map).forEach(item => {
   LoginItem[item] = generator({
     defaultProps: map[item].props,
     defaultRules: map[item].rules,
-    type: item,
+    type: item
   })(map[item].component);
 });
 

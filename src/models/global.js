@@ -2,16 +2,16 @@ export default {
   namespace: 'global',
 
   state: {
-    collapsed: false,
+    collapsed: false
   },
 
   reducers: {
     changeLayoutCollapsed(state, { payload }) {
       return {
         ...state,
-        collapsed: payload,
+        collapsed: payload
       };
-    },
+    }
   },
 
   subscriptions: {
@@ -22,6 +22,6 @@ export default {
           window.ga('send', 'pageview', pathname + search);
         }
       });
-    },
-  },
+    }
+  }
 };

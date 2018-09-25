@@ -24,11 +24,11 @@ export default class PageHeader extends PureComponent {
     routes: PropTypes.array,
     params: PropTypes.object,
     location: PropTypes.object,
-    breadcrumbNameMap: PropTypes.object,
+    breadcrumbNameMap: PropTypes.object
   };
 
   state = {
-    breadcrumb: null,
+    breadcrumb: null
   };
 
   componentDidMount() {
@@ -55,26 +55,30 @@ export default class PageHeader extends PureComponent {
       routes: croutes,
       params: cparams,
       location: clocation,
-      breadcrumbNameMap: cbreadcrumbNameMap,
+      breadcrumbNameMap: cbreadcrumbNameMap
     } = this.context;
     return {
       routes: routes || croutes,
       params: params || cparams,
       routerLocation: location || clocation,
-      breadcrumbNameMap: breadcrumbNameMap || cbreadcrumbNameMap,
+      breadcrumbNameMap: breadcrumbNameMap || cbreadcrumbNameMap
     };
   };
 
   getBreadcrumbDom = () => {
     const breadcrumb = this.conversionBreadcrumbList();
     this.setState({
-      breadcrumb,
+      breadcrumb
     });
   };
 
   // Generated according to props
   conversionFromProps = () => {
-    const { breadcrumbList, breadcrumbSeparator, linkElement = 'a' } = this.props;
+    const {
+      breadcrumbList,
+      breadcrumbSeparator,
+      linkElement = 'a'
+    } = this.props;
     return (
       <Breadcrumb className={styles.breadcrumb} separator={breadcrumbSeparator}>
         {breadcrumbList.map(item => (
@@ -83,7 +87,7 @@ export default class PageHeader extends PureComponent {
               ? createElement(
                   linkElement,
                   {
-                    [linkElement === 'a' ? 'href' : 'to']: item.href,
+                    [linkElement === 'a' ? 'href' : 'to']: item.href
                   },
                   item.title
                 )
@@ -101,7 +105,8 @@ export default class PageHeader extends PureComponent {
     // Loop data mosaic routing
     const extraBreadcrumbItems = pathSnippets.map((url, index) => {
       const currentBreadcrumb = getBreadcrumb(breadcrumbNameMap, url);
-      const isLinkable = index !== pathSnippets.length - 1 && currentBreadcrumb.component;
+      const isLinkable =
+        index !== pathSnippets.length - 1 && currentBreadcrumb.component;
       return currentBreadcrumb.name && !currentBreadcrumb.hideInBreadcrumb ? (
         <Breadcrumb.Item key={url}>
           {createElement(
@@ -118,7 +123,7 @@ export default class PageHeader extends PureComponent {
         {createElement(
           linkElement,
           {
-            [linkElement === 'a' ? 'href' : 'to']: '/',
+            [linkElement === 'a' ? 'href' : 'to']: '/'
           },
           'Home'
         )}
@@ -136,7 +141,12 @@ export default class PageHeader extends PureComponent {
    */
   conversionBreadcrumbList = () => {
     const { breadcrumbList, breadcrumbSeparator } = this.props;
-    const { routes, params, routerLocation, breadcrumbNameMap } = this.getBreadcrumbProps();
+    const {
+      routes,
+      params,
+      routerLocation,
+      breadcrumbNameMap
+    } = this.getBreadcrumbProps();
     if (breadcrumbList && breadcrumbList.length) {
       return this.conversionFromProps();
     }
@@ -170,7 +180,7 @@ export default class PageHeader extends PureComponent {
         linkElement,
         {
           href: paths.join('/') || '/',
-          to: paths.join('/') || '/',
+          to: paths.join('/') || '/'
         },
         route.breadcrumbName
       )
@@ -188,7 +198,7 @@ export default class PageHeader extends PureComponent {
       className,
       tabActiveKey,
       tabDefaultActiveKey,
-      tabBarExtraContent,
+      tabBarExtraContent
     } = this.props;
     const { breadcrumb } = this.state;
 
@@ -213,7 +223,9 @@ export default class PageHeader extends PureComponent {
             </div>
             <div className={styles.row}>
               {content && <div className={styles.content}>{content}</div>}
-              {extraContent && <div className={styles.extraContent}>{extraContent}</div>}
+              {extraContent && (
+                <div className={styles.extraContent}>{extraContent}</div>
+              )}
             </div>
           </div>
         </div>

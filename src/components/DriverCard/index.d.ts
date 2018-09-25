@@ -9,4 +9,7 @@ export interface IDriverCardProps {
   style?: React.CSSProperties;
 }
 
-export default class DriverCard extends React.Component<IDriverCardProps, any> {}
+export default class DriverCard extends React.Component<
+  IDriverCardProps,
+  any
+> {}

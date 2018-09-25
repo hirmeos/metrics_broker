@@ -12,14 +12,14 @@ export default class TitleTableForm extends PureComponent {
 
     this.state = {
       data: props.value,
-      loading: false,
+      loading: false
     };
   }
 
   componentWillReceiveProps(nextProps) {
     if ('value' in nextProps) {
       this.setState({
-        data: nextProps.value,
+        data: nextProps.value
       });
     }
   }
@@ -31,13 +31,7 @@ export default class TitleTableForm extends PureComponent {
 
   getIndexByKey(key, newData) {
     const { data } = this.state;
-    let index = null;
-    (newData || data).map((item, k) => {
-      if (item.key === key) {
-        index = k;
-      }
-    });
-    return index;
+    return (newData || data).indexOf(this.getRowByKey(key, newData));
   }
 
   toggleEditable = (e, key) => {
@@ -46,6 +40,8 @@ export default class TitleTableForm extends PureComponent {
     const newData = data.map(item => ({ ...item }));
     const target = this.getRowByKey(key, newData);
     const index = this.getIndexByKey(key, newData);
+    console.log(newData);
+    console.log(index);
     if (target) {
       if (!target.editable) {
         this.cacheOriginData[key] = { ...target };
@@ -62,7 +58,7 @@ export default class TitleTableForm extends PureComponent {
       key: `NEW_TEMP_ID_${this.index}`,
       title: '',
       editable: true,
-      isNew: true,
+      isNew: true
     });
     this.index += 1;
     this.setState({ data: newData });
@@ -95,7 +91,7 @@ export default class TitleTableForm extends PureComponent {
   saveRow(e, key) {
     e.persist();
     this.setState({
-      loading: true,
+      loading: true
     });
     setTimeout(() => {
       if (this.clickedCancel) {
@@ -107,7 +103,7 @@ export default class TitleTableForm extends PureComponent {
         message.error('Please complete the titles section');
         e.target.focus();
         this.setState({
-          loading: false,
+          loading: false
         });
         return;
       }
@@ -117,7 +113,7 @@ export default class TitleTableForm extends PureComponent {
       delete target.isNew;
       onChange(data);
       this.setState({
-        loading: false,
+        loading: false
       });
     }, 500);
   }
@@ -157,7 +153,7 @@ export default class TitleTableForm extends PureComponent {
             );
           }
           return text;
-        },
+        }
       },
       {
         title: 'Actions',
@@ -173,7 +169,10 @@ export default class TitleTableForm extends PureComponent {
                 <span>
                   <a onClick={e => this.saveRow(e, record.key)}>Save</a>
                   <Divider type="vertical" />
-                  <Popconfirm title="Are you sure you want to delete this title?" onConfirm={() => this.remove(record.key)}>
+                  <Popconfirm
+                    title="Are you sure you want to delete this title?"
+                    onConfirm={() => this.remove(record.key)}
+                  >
                     <a>Delete</a>
                   </Popconfirm>
                 </span>
@@ -191,13 +190,16 @@ export default class TitleTableForm extends PureComponent {
             <span>
               <a onClick={e => this.toggleEditable(e, record.key)}>Edit</a>
               <Divider type="vertical" />
-              <Popconfirm title="Are you sure you want to delete this entry?？" onConfirm={() => this.remove(record.key)}>
+              <Popconfirm
+                title="Are you sure you want to delete this entry?？"
+                onConfirm={() => this.remove(record.key)}
+              >
                 <a>Delete</a>
               </Popconfirm>
             </span>
           );
-        },
-      },
+        }
+      }
     ];
 
     const { loading, data } = this.state;

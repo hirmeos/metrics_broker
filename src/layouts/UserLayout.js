@@ -1,7 +1,6 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'umi/locale';
 import Link from 'umi/link';
-import { Icon } from 'antd';
 import styles from './UserLayout.less';
 import logo from '../assets/logo.svg';
 
@@ -16,12 +15,12 @@ class UserLayout extends React.PureComponent {
               <Link to="/">
                 <img alt="logo" className={styles.logo} src={logo} />
                 <span className={styles.title}>
-                  <FormattedMessage id='app.name' />
+                  <FormattedMessage id="app.name" />
                 </span>
               </Link>
             </div>
             <div className={styles.desc}>
-              <FormattedMessage id='navbar.login' />
+              <FormattedMessage id="navbar.login" />
             </div>
           </div>
           {children}

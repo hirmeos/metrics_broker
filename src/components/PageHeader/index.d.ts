@@ -17,4 +17,7 @@ export interface IPageHeaderProps {
   style?: React.CSSProperties;
 }
 
-export default class PageHeader extends React.Component<IPageHeaderProps, any> {}
+export default class PageHeader extends React.Component<
+  IPageHeaderProps,
+  any
+> {}

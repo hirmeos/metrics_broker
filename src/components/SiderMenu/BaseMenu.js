@@ -68,9 +68,11 @@ export default class BaseMenu extends PureComponent {
   // Get the currently selected menu
   getSelectedMenuKeys = () => {
     const {
-      location: { pathname },
+      location: { pathname }
     } = this.props;
-    return urlToList(pathname).map(itemPath => getMenuMatches(this.flatMenuKeys, itemPath).pop());
+    return urlToList(pathname).map(itemPath =>
+      getMenuMatches(this.flatMenuKeys, itemPath).pop()
+    );
   };
 
   /**
@@ -78,7 +80,11 @@ export default class BaseMenu extends PureComponent {
    */
   getSubMenuOrItem = item => {
     // doc: add hideChildrenInMenu
-    if (item.children && !item.hideChildrenInMenu && item.children.some(child => child.name)) {
+    if (
+      item.children &&
+      !item.hideChildrenInMenu &&
+      item.children.some(child => child.name)
+    ) {
       const name = formatMessage({ id: item.locale });
       return (
         <SubMenu
@@ -167,7 +173,7 @@ export default class BaseMenu extends PureComponent {
     let props = {};
     if (openKeys) {
       props = {
-        openKeys,
+        openKeys
       };
     }
     const { handleOpenChange, style, menuData } = this.props;

@@ -6,7 +6,6 @@ describe('Login', () => {
   let page;
   const startUrl = 'http://localhost:8000/login';
 
-
   beforeAll(async () => {
     browser = await puppeteer.launch({ args: ['--no-sandbox'] });
   });

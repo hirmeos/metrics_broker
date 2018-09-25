@@ -1,32 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Link } from 'dva/router';
-import { Checkbox, Alert, Icon } from 'antd';
+import { Alert } from 'antd';
 import Login from '@/components/Login';
 import styles from './Login.less';
 
-const { UserName, Password, Captcha, Submit } = Login;
+const { UserName, Password, Submit } = Login;
 
 @connect(({ login, loading }) => ({
   login,
-  submitting: loading.effects['login/login'],
+  submitting: loading.effects['login/login']
 }))
-export default class LoginPage extends Component {
-
+class LoginPage extends Component {
   handleSubmit = (err, values) => {
     const { dispatch } = this.props;
     if (!err) {
       dispatch({
         type: 'login/login',
         payload: {
-          ...values,
-        },
+          ...values
+        }
       });
     }
   };
 
   renderMessage = content => {
-    return <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon />;
+    return (
+      <Alert
+        style={{ marginBottom: 24 }}
+        message={content}
+        type="error"
+        showIcon
+      />
+    );
   };
 
   render() {
@@ -34,14 +39,18 @@ export default class LoginPage extends Component {
     return (
       <div className={styles.main}>
         <Login onSubmit={this.handleSubmit}>
-            {login.status === 'error' &&
+          {login.status === 'error' &&
             !submitting &&
             this.renderMessage('Incorrect email and/or password')}
           <UserName name="email" placeholder="Email" />
           <Password name="password" placeholder="Password" />
-          <Submit id="loginBtn" loading={submitting}>Login</Submit>
+          <Submit id="loginBtn" loading={submitting}>
+            Login
+          </Submit>
         </Login>
       </div>
     );
   }
 }
+
+export default LoginPage;

@@ -8,7 +8,7 @@ function checkStatus(responseBody) {
   }
   notification.error({
     message: responseBody.message,
-    description: responseBody.description,
+    description: responseBody.description
   });
   const error = new Error(responseBody.message);
   error.name = responseBody.code;
@@ -25,14 +25,14 @@ function checkStatus(responseBody) {
  */
 export default function request(url, options) {
   const defaultOptions = {
-    credentials: 'include',
+    credentials: 'include'
   };
   const newOptions = { ...defaultOptions, ...options };
   const token = getToken();
   if (token) {
     newOptions.headers = {
-      'Authorization': `Bearer ${token}`,
-      ...newOptions.headers,
+      Authorization: `Bearer ${token}`,
+      ...newOptions.headers
     };
   }
   if (
@@ -44,14 +44,14 @@ export default function request(url, options) {
       newOptions.headers = {
         Accept: 'application/json',
         'Content-Type': 'application/json; charset=utf-8',
-        ...newOptions.headers,
+        ...newOptions.headers
       };
       newOptions.body = JSON.stringify(newOptions.body);
     } else {
       // newOptions.body is FormData
       newOptions.headers = {
         Accept: 'application/json',
-        ...newOptions.headers,
+        ...newOptions.headers
       };
     }
   }
@@ -70,10 +70,8 @@ export default function request(url, options) {
         // @HACK
         /* eslint-disable no-underscore-dangle */
         window.g_app._store.dispatch({
-          type: 'login/logout',
+          type: 'login/logout'
         });
-        return;
       }
-      return;
     });
 }

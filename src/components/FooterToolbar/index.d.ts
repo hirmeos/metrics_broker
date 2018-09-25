@@ -4,4 +4,7 @@ export interface IFooterToolbarProps {
   style?: React.CSSProperties;
 }
 
-export default class FooterToolbar extends React.Component<IFooterToolbarProps, any> {}
+export default class FooterToolbar extends React.Component<
+  IFooterToolbarProps,
+  any
+> {}

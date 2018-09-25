@@ -4,14 +4,14 @@ import defaultSettings from '../defaultSettings';
 let lessNodesAppended;
 const updateTheme = primaryColor => {
   // // Don't compile less in production!
-  if (APP_TYPE !== 'site') {
+  if (NODE_ENV === 'production') {
     return;
   }
   // Determine if the component is remounted
   if (!primaryColor) {
     return;
   }
-  const hideMessage = message.loading('Compiling theme', 0);
+  const hideMessage = message.loading('正在编译主题！', 0);
   function buildIt() {
     if (!window.less) {
       return;
@@ -19,7 +19,7 @@ const updateTheme = primaryColor => {
     setTimeout(() => {
       window.less
         .modifyVars({
-          '@primary-color': primaryColor,
+          '@primary-color': primaryColor
         })
         .then(() => {
           hideMessage();
@@ -44,7 +44,8 @@ const updateTheme = primaryColor => {
         javascriptEnabled: true
       };
     `;
-    lessScriptNode.src = 'https://gw.alipayobjects.com/os/lib/less.js/3.8.1/less.min.js';
+    lessScriptNode.src =
+      'https://gw.alipayobjects.com/os/lib/less.js/3.8.1/less.min.js';
     lessScriptNode.async = true;
     lessScriptNode.onload = () => {
       buildIt();
@@ -83,7 +84,7 @@ export default {
       updateColorWeak(colorWeak);
       return {
         ...state,
-        ...setting,
+        ...setting
       };
     },
     changeSetting(state, { payload }) {
@@ -116,8 +117,8 @@ export default {
       window.history.replaceState(null, 'setting', urlParams.href);
       return {
         ...state,
-        ...payload,
+        ...payload
       };
-    },
-  },
+    }
+  }
 };

@@ -5,11 +5,11 @@ import styles from './index.less';
 
 export default class FooterToolbar extends Component {
   static contextTypes = {
-    isMobile: PropTypes.bool,
+    isMobile: PropTypes.bool
   };
 
   state = {
-    width: undefined,
+    width: undefined
   };
 
   componentDidMount() {
@@ -38,7 +38,11 @@ export default class FooterToolbar extends Component {
     const { children, className, extra, ...restProps } = this.props;
     const { width } = this.state;
     return (
-      <div className={classNames(className, styles.toolbar)} style={{ width }} {...restProps}>
+      <div
+        className={classNames(className, styles.toolbar)}
+        style={{ width }}
+        {...restProps}
+      >
         <div className={styles.left}>{extra}</div>
         <div className={styles.right}>{children}</div>
       </div>
