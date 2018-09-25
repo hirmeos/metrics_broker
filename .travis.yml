@@ -1,11 +1,16 @@
 language: node_js
 node_js:
   - "node"
+dist: trusty
+addons:
+  apt:
+    packages:
+      - libnss3
 env:
   - NODE_ENV=testing
-install:
-  - sh ./tests/fix_puppeteer.sh
-  - npm install
+cache:
+  directories:
+    - node_modules
 script:
   - npm run lint
   - npm run test:all
