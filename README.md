@@ -1,4 +1,5 @@
 # Metrics Broker
+[![Build Status](https://travis-ci.org/hirmeos/metrics_broker.svg?branch=master)](https://travis-ci.org/hirmeos/metrics_broker) [![Dependencies](https://img.shields.io/david/hirmeos/metrics_broker.svg)](https://david-dm.org/hirmeos/metrics_broker) [![DevDependencies](https://img.shields.io/david/dev/hirmeos/metrics_broker.svg)](https://david-dm.org/hirmeos/metrics_broker?type=dev)
 
 A dashboard to control metrics drivers.
 
