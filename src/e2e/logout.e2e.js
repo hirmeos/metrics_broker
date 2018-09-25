@@ -14,8 +14,8 @@ describe('Logout', () => {
   beforeEach(async () => {
     page = await browser.newPage();
     await page.goto(startUrl, { waitUntil: 'networkidle2' });
-    await page.evaluate(() => {
-      window.localStorage.setItem('metrics-broker-token', token);
+    await page.evaluate((t) => {
+      window.localStorage.setItem('metrics-broker-token', t);
     }, token);
     await page.evaluate(() =>
       window.localStorage.setItem('metrics-broker-authority', 'admin')
