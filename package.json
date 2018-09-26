@@ -1,6 +1,6 @@
 {
   "name": "metrics_broker",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A dashboard to control metrics drivers",
   "author": "Javier Arias",
   "private": true,
@@ -67,7 +67,6 @@
     "gh-pages": "^2.0.0",
     "husky": "^1.0.0",
     "lint-staged": "^7.2.0",
-    "merge-umi-mock-data": "^0.0.3",
     "mockjs": "^1.0.1-beta3",
     "prettier": "^1.14.2",
     "pro-download": "^1.0.1",
