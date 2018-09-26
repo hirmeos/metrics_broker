@@ -8,9 +8,6 @@ services:
       - dist:/usr/src/app/dist
     env_file:
       - ./var.env
-    networks:
-      statistics_collection:
-        ipv4_address: 172.21.0.6
 
   metrics_broker:
     image: nginx
@@ -18,14 +15,6 @@ services:
     restart: unless-stopped
     volumes:
       - dist:/usr/share/nginx/html:ro
-    networks:
-      statistics_collection:
-        ipv4_address: 172.21.0.5
 
 volumes:
   dist:
-
-networks:
-  statistics_collection:
-    external: true
-    name: statistics
