@@ -4,6 +4,8 @@
 A dashboard to control metrics drivers.
 
 ## Usage
+First we need to define the URLs of the APIs in `var.env`; a template can be found in `var.env.example`.
+
 ### Production
 Using docker:
 ```bash
@@ -13,6 +15,7 @@ docker-compose up -d
 
 Or manually:
 ```bash
+npm install
 npm run build
 ```
 
