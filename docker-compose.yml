@@ -9,9 +9,9 @@ services:
     env_file:
       - ./var.env
 
-  metrics_broker:
+  metrics_broker_web:
     image: nginx
-    container_name: "metrics_broker"
+    container_name: "metrics_broker_web"
     restart: unless-stopped
     volumes:
       - dist:/usr/share/nginx/html:ro
