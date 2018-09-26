@@ -52,7 +52,7 @@ npm run prettier
 
 Eslint's configuration is defined in `.eslintrc.js`, prettier's in `.prettierrc`.
 
-NB. For development purposes it is recommended to install all dependencies (`npm install`) - husk will automatically configure a hook to trigger `npm run precommit` automatically upon commit. However, the app should still be run in a container, to ensure that it works in an isolated environment.
+NB. For development purposes it is recommended to install all dependencies (`npm install`) - husky will automatically configure a hook to trigger `npm run precommit` automatically upon commit. However, the app should still be run in a container, to ensure that it works in an isolated environment.
 
 ## Further reading
 The Metrics Broker is based in [Ant Design Pro 2.0](https://pro.ant.design/), a React UI library powered by [UmiJS](https://umijs.org/) - in order to understand the architecture of the code it is recommended that you go through both documentations.
