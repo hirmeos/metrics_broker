@@ -62,7 +62,7 @@ export default class URITableForm extends PureComponent {
     const newData = data.map(item => ({ ...item }));
     newData.push({
       key: `NEW_TEMP_ID_${this.index}`,
-      title: '',
+      uri: '',
       canonical: false,
       editable: true,
       isNew: true
@@ -107,8 +107,8 @@ export default class URITableForm extends PureComponent {
         return;
       }
       const target = this.getRowByKey(key) || {};
-      if (!target.title) {
-        message.error('Please complete the titles section');
+      if (!target.uri) {
+        message.error('Please complete the URIs section');
         e.target.focus();
         this.setState({
           loading: false
@@ -145,8 +145,8 @@ export default class URITableForm extends PureComponent {
     const columns = [
       {
         title: 'URI',
-        dataIndex: 'title',
-        key: 'title',
+        dataIndex: 'uri',
+        key: 'uri',
         width: '80%',
         render: (text, record) => {
           if (record.editable) {
@@ -154,7 +154,7 @@ export default class URITableForm extends PureComponent {
               <Input
                 value={text}
                 autoFocus
-                onChange={e => this.handleFieldChange(e, 'title', record.key)}
+                onChange={e => this.handleFieldChange(e, 'uri', record.key)}
                 onKeyPress={e => this.handleKeyPress(e, record.key)}
                 placeholder="URI"
               />
@@ -196,7 +196,7 @@ export default class URITableForm extends PureComponent {
                   <a onClick={e => this.saveRow(e, record.key)}>Save</a>
                   <Divider type="vertical" />
                   <Popconfirm
-                    title="Are you sure you want to delete this title?"
+                    title="Are you sure you want to delete this uri?"
                     onConfirm={() => this.remove(record.key)}
                   >
                     <a>Delete</a>
