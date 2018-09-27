@@ -196,7 +196,7 @@ export default class URITableForm extends PureComponent {
                   <a onClick={e => this.saveRow(e, record.key)}>Save</a>
                   <Divider type="vertical" />
                   <Popconfirm
-                    title="Are you sure you want to delete this uri?"
+                    title="Are you sure you want to delete this URI?"
                     onConfirm={() => this.remove(record.key)}
                   >
                     <a>Delete</a>
@@ -217,7 +217,7 @@ export default class URITableForm extends PureComponent {
               <a onClick={e => this.toggleEditable(e, record.key)}>Edit</a>
               <Divider type="vertical" />
               <Popconfirm
-                title="Are you sure you want to delete this entry?？"
+                title="Are you sure you want to delete this URI?"
                 onConfirm={() => this.remove(record.key)}
               >
                 <a>Delete</a>
