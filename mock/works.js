@@ -5,7 +5,7 @@ const postFakeWork = (req, res) => {
     res.json({
       status: 'error',
       code: 403,
-      count: 1,
+      count: 0,
       data: [],
       description: '',
       message: 'You do not have permissions to access this resource.'
@@ -15,7 +15,7 @@ const postFakeWork = (req, res) => {
   const { type, title, uri } = req.body;
   res.json({
     status: 'ok',
-    count: 21,
+    count: 1,
     code: 200,
     data: [{ title, uri, type, UUID: 'efa6e4f6-41b7-46c8-a68f-c19711cde8da' }]
   });
@@ -26,7 +26,7 @@ const getFakeWorks = (req, res) => {
     res.json({
       status: 'error',
       code: 403,
-      count: 1,
+      count: 0,
       data: [],
       description: '',
       message: 'You do not have permissions to access this resource.'
