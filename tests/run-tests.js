@@ -5,6 +5,7 @@ const env = Object.create(process.env);
 env.BROWSER = 'none';
 env.TEST = true;
 env.NODE_ENV = 'testing';
+let once = false;
 const startServer = spawn(
   /^win/.test(process.platform) ? 'npm.cmd' : 'npm',
   ['start'],
@@ -25,9 +26,8 @@ startServer.on('exit', () => {
 // eslint-disable-next-line
 console.log('Starting development server for e2e tests...');
 startServer.stdout.on('data', data => {
-  // eslint-disable-next-line
-  console.log(data.toString());
-  if (data.toString().indexOf('App running at') >= 0) {
+  if (!once && data.toString().indexOf('App running at') >= 0) {
+    once = true;
     // eslint-disable-next-line
     console.log('Development server has started, ready to run tests.');
     const testCmd = spawn(
