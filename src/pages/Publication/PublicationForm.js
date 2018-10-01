@@ -51,9 +51,16 @@ class AddPublicationForm extends PureComponent {
       validateFieldsAndScroll((error, values) => {
         if (!error) {
           // submit the values
+          const newPub = {};
+          newPub.type = values.type;
+          newPub.uri = values.uri.map(uri => ({
+            uri: uri.uri,
+            canonical: uri.canonical
+          }));
+          newPub.title = values.title.map(title => title.title);
           dispatch({
-            type: 'form/submitAddForm',
-            payload: values
+            type: 'publication/submitAddForm',
+            payload: newPub
           });
         }
       });
@@ -95,7 +102,7 @@ class AddPublicationForm extends PureComponent {
             trigger="click"
             getPopupContainer={trigger => trigger.parentNode}
           >
-            <Icon type="exclamation-circle" />
+            <Icon id="errors-icon" type="exclamation-circle" />
           </Popover>
           {errorCount}
         </span>
@@ -106,7 +113,11 @@ class AddPublicationForm extends PureComponent {
     })(
       <Select placeholder="Please choose publication type">
         {workType.map(type => (
-          <Option key={type.work_type} value={type.work_type}>
+          <Option
+            id={type.work_type}
+            key={type.work_type}
+            value={type.work_type}
+          >
             {type.work_type}
           </Option>
         ))}
@@ -119,12 +130,12 @@ class AddPublicationForm extends PureComponent {
         content="Add a new publication and its URIs."
         wrapperClassName={styles.advancedForm}
       >
-        <Card className={styles.card} bordered={false}>
+        <Card id="type-card" className={styles.card} bordered={false}>
           <Form layout="vertical">
             <Form.Item label={fieldLabels.type}>{typeSelect}</Form.Item>
           </Form>
         </Card>
-        <Card className={styles.card} bordered={false}>
+        <Card id="title-card" className={styles.card} bordered={false}>
           <Form.Item label={fieldLabels.title}>
             {getFieldDecorator('title', {
               rules: fieldRules.title,
@@ -132,7 +143,7 @@ class AddPublicationForm extends PureComponent {
             })(<TitleTableForm />)}
           </Form.Item>
         </Card>
-        <Card className={styles.card} bordered={false}>
+        <Card id="uri-card" className={styles.card} bordered={false}>
           <Form.Item label={fieldLabels.uri}>
             {getFieldDecorator('uri', {
               rules: fieldRules.uri,
@@ -142,7 +153,12 @@ class AddPublicationForm extends PureComponent {
         </Card>
         <FooterToolbar>
           {getErrorInfo()}
-          <Button type="primary" onClick={validate} loading={submitting}>
+          <Button
+            id="form-submit-btn"
+            type="primary"
+            onClick={validate}
+            loading={submitting}
+          >
             Submit
           </Button>
         </FooterToolbar>
