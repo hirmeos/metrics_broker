@@ -51,7 +51,6 @@
     "babel-eslint": "^10.0.0",
     "cross-env": "^5.1.1",
     "cross-port-killer": "^1.0.1",
-    "enzyme": "^3.4.1",
     "eslint": "^5.1.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-config-prettier": "^3.0.1",
