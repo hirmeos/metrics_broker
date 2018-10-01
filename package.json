@@ -23,7 +23,7 @@
   "dependencies": {
     "@babel/runtime": "^7.0.0",
     "antd": "^3.9.2",
-    "classnames": "^2.2.5",
+    "classnames": "^2.2.6",
     "dva": "^2.4.0",
     "enquire-js": "^0.2.1",
     "hash.js": "^1.1.5",
@@ -55,7 +55,7 @@
     "cross-env": "^5.1.1",
     "cross-port-killer": "^1.0.1",
     "enzyme": "^3.4.1",
-    "eslint": "^5.0.0",
+    "eslint": "^5.1.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-config-prettier": "^3.0.1",
     "eslint-plugin-babel": "^5.1.0",
@@ -73,8 +73,8 @@
     "stylelint": "^9.4.1",
     "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-standard": "^18.0.0",
-    "umi": "^2.0.1",
-    "umi-plugin-react": "^1.0.1"
+    "umi": "^2.1.1",
+    "umi-plugin-react": "^1.1.1"
   },
   "optionalDependencies": {
     "puppeteer": "^1.6.0"
