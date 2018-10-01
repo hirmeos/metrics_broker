@@ -152,6 +152,7 @@ export default class URITableForm extends PureComponent {
           if (record.editable) {
             return (
               <Input
+                id={`uri-${record.key}`}
                 value={text}
                 autoFocus
                 onChange={e => this.handleFieldChange(e, 'uri', record.key)}
@@ -171,6 +172,8 @@ export default class URITableForm extends PureComponent {
           if (record.editable) {
             return (
               <Checkbox
+                id={`uri-canonical-${record.key}`}
+                checked={record.canonical}
                 value={value}
                 onChange={e =>
                   this.handleFieldChange(e, 'canonical', record.key)
@@ -193,7 +196,12 @@ export default class URITableForm extends PureComponent {
             if (record.isNew) {
               return (
                 <span>
-                  <a onClick={e => this.saveRow(e, record.key)}>Save</a>
+                  <a
+                    onClick={e => this.saveRow(e, record.key)}
+                    id={`save-uri-btn-${record.key}`}
+                  >
+                    Save
+                  </a>
                   <Divider type="vertical" />
                   <Popconfirm
                     title="Are you sure you want to delete this URI?"
@@ -206,7 +214,12 @@ export default class URITableForm extends PureComponent {
             }
             return (
               <span>
-                <a onClick={e => this.saveRow(e, record.key)}>Save</a>
+                <a
+                  onClick={e => this.saveRow(e, record.key)}
+                  id={`save-uri-btn-${record.key}`}
+                >
+                  Save
+                </a>
                 <Divider type="vertical" />
                 <a onClick={e => this.cancel(e, record.key)}>Cancel</a>
               </span>
@@ -214,7 +227,12 @@ export default class URITableForm extends PureComponent {
           }
           return (
             <span>
-              <a onClick={e => this.toggleEditable(e, record.key)}>Edit</a>
+              <a
+                onClick={e => this.toggleEditable(e, record.key)}
+                id={`edit-uri-btn-${record.key}`}
+              >
+                Edit
+              </a>
               <Divider type="vertical" />
               <Popconfirm
                 title="Are you sure you want to delete this URI?"
@@ -242,6 +260,7 @@ export default class URITableForm extends PureComponent {
           }}
         />
         <Button
+          id="new-uri-btn"
           style={{ width: '100%', marginTop: 16, marginBottom: 8 }}
           type="dashed"
           onClick={this.newURI}
