@@ -21,7 +21,11 @@ export default {
       const response = yield call(getWorks, payload);
       yield put({
         type: 'queryList',
-        payload: Array.isArray(response.data) ? response.data : []
+        payload: Array.isArray(response.data)
+          ? response.data.length === 1
+            ? response.data[0]
+            : response.data
+          : []
       });
     }
   },
