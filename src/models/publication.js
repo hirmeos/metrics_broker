@@ -1,6 +1,6 @@
 import { routerRedux } from 'dva/router';
 import { message } from 'antd';
-import { addWork, getWorks } from '../services/api';
+import { addWork, editWork, getWorks } from '../services/api';
 
 export default {
   namespace: 'publication',
@@ -12,6 +12,13 @@ export default {
   effects: {
     *submitAddForm({ payload }, { call, put }) {
       const response = yield call(addWork, payload);
+      if (response !== undefined && response.status === 'ok') {
+        message.success('Publication saved successfully.');
+        yield put(routerRedux.replace('/publications/list'));
+      }
+    },
+    *submitEditForm({ payload }, { call, put }) {
+      const response = yield call(editWork, payload);
       if (response !== undefined && response.status === 'ok') {
         message.success('Publication saved successfully.');
         yield put(routerRedux.replace('/publications/list'));

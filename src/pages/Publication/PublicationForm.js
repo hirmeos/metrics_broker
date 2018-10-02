@@ -78,16 +78,23 @@ class PublicationForm extends PureComponent {
       validateFieldsAndScroll((error, values) => {
         if (!error) {
           // submit the values
-          const newPub = {};
-          newPub.type = values.type;
-          newPub.uri = values.uri.map(uri => ({
+          const work = {};
+          work.type = values.type;
+          work.uri = values.uri.map(uri => ({
             uri: uri.uri,
             canonical: uri.canonical
           }));
-          newPub.title = values.title.map(title => title.title);
+          work.title = values.title.map(title => title.title);
+          if (publication.UUID) {
+            work.uuid = publication.UUID;
+          }
+          const action =
+            this.formAction === 'add'
+              ? 'publication/submitAddForm'
+              : 'publication/submitEditForm';
           dispatch({
-            type: 'publication/submitAddForm',
-            payload: newPub
+            type: action,
+            payload: work
           });
         }
       });

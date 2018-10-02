@@ -23,6 +23,13 @@ export async function addWork(params) {
   });
 }
 
+export async function editWork(params) {
+  return request(`${REACT_APP_URI_API}/works`, {
+    method: 'PUT',
+    body: params
+  });
+}
+
 export async function driverData() {
   return request(`${REACT_APP_DRIVER_API}/drivers`);
 }
