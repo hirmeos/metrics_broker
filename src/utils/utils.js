@@ -135,6 +135,15 @@ export function getPageQuery() {
   return parse(window.location.href.split('?')[1]);
 }
 
+/**
+ * Attempt to return a UUID from the last part of the current path
+ */
+export function getPageUuid() {
+  const parts = window.location.href.split('/');
+  const last = parts[parts.length - 1];
+  return isUuid(last) ? last : '';
+}
+
 export function getQueryPath(path = '', query = {}) {
   const search = stringify(query);
   if (search.length) {
@@ -144,8 +153,13 @@ export function getQueryPath(path = '', query = {}) {
 }
 
 /* eslint no-useless-escape:0 */
-const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/;
+const uuidReg = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+const urlReg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/;
 
 export function isUrl(path) {
-  return reg.test(path);
+  return urlReg.test(path);
+}
+
+export function isUuid(uuid) {
+  return uuidReg.test(uuid);
 }
