@@ -4,6 +4,8 @@ import { fakeToken } from '../../mock/fakeToken';
 describe('Work Add Form', () => {
   let browser;
   let page;
+  const width = 1920;
+  const height = 1080;
   const startUrl = 'http://localhost:8000/publications/add';
   const token = fakeToken();
 
@@ -15,7 +17,7 @@ describe('Work Add Form', () => {
     page = await browser.newPage();
     // standard viewpoint doesn't fully cover #new-title-btn, so puppeteer
     // doesn't properly trigger title tests.
-    page.setViewport({ width: 1920, height: 1080 });
+    page.setViewport({ width, height });
     await page.goto(startUrl, { waitUntil: 'networkidle2' });
     await page.evaluate(t => {
       window.localStorage.setItem('metrics-broker-token', t);
