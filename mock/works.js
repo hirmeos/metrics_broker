@@ -21,6 +21,27 @@ const postFakeWork = (req, res) => {
   });
 };
 
+const putFakeWork = (req, res) => {
+  if (req.headers.authorization !== `Bearer ${fakeToken()}`) {
+    res.json({
+      status: 'error',
+      code: 403,
+      count: 0,
+      data: [],
+      description: '',
+      message: 'You do not have permissions to access this resource.'
+    });
+    return;
+  }
+  const { uuid, type, title, uri } = req.body;
+  res.json({
+    status: 'ok',
+    count: 1,
+    code: 200,
+    data: [{ title, uri, type, uuid }]
+  });
+};
+
 const getFakeWorks = (req, res) => {
   if (req.headers.authorization !== `Bearer ${fakeToken()}`) {
     res.json({
@@ -1138,5 +1159,6 @@ const works = [
 
 export default {
   'GET /works': getFakeWorks,
-  'POST /works': postFakeWork
+  'POST /works': postFakeWork,
+  'PUT /works': putFakeWork
 };
