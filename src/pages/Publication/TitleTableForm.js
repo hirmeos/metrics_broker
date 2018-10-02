@@ -18,7 +18,7 @@ export default class TitleTableForm extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     if ('value' in nextProps) {
-      this.index = nextProps.value ? nextProps.value.length + 1 : 0;
+      this.index = nextProps.value ? nextProps.value.length : 0;
       this.setState({
         data: nextProps.value
       });

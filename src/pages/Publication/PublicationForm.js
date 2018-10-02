@@ -170,7 +170,7 @@ class PublicationForm extends PureComponent {
       ? publication.title.map((val, key) => ({
           editable: false,
           isNew: false,
-          key: `TITLE_ID_${key + 1}`,
+          key: `TITLE_ID_${key}`,
           title: val
         }))
       : [];
@@ -179,7 +179,7 @@ class PublicationForm extends PureComponent {
       ? publication.URI.map((val, key) => ({
           editable: false,
           isNew: false,
-          key: `URI_ID_${key + 1}`,
+          key: `URI_ID_${key}`,
           uri: val.URI,
           canonical: val.canonical
         }))
