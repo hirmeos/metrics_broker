@@ -36,6 +36,11 @@ export default {
         ...state,
         publication: action.payload
       };
+    },
+    clear() {
+      return {
+        publication: []
+      };
     }
   }
 };

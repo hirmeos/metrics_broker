@@ -57,6 +57,13 @@ class PublicationForm extends PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'publication/clear'
+    });
+  }
+
   render() {
     const {
       workType: { workType },
