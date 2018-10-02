@@ -135,13 +135,9 @@ export function getPageQuery() {
   return parse(window.location.href.split('?')[1]);
 }
 
-/**
- * Attempt to return a UUID from the last part of the current path
- */
-export function getPageUuid() {
+export function getLastPart() {
   const parts = window.location.href.split('/');
-  const last = parts[parts.length - 1];
-  return isUuid(last) ? last : '';
+  return parts[parts.length - 1];
 }
 
 export function getQueryPath(path = '', query = {}) {
