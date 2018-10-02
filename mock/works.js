@@ -35,12 +35,24 @@ const getFakeWorks = (req, res) => {
   }
   const { uuid } = req.query;
   if (uuid) {
-    res.json({
-      status: 'ok',
-      count: 1,
-      code: 200,
-      data: getSingleWork(uuid)
-    });
+    const result = getSingleWork(uuid);
+    if (result.length === 0) {
+      res.json({
+        status: 'error',
+        code: 404,
+        message: 'No records have matched your search criteria.',
+        description: '',
+        count: 0,
+        data: []
+      });
+    } else {
+      res.json({
+        status: 'ok',
+        count: 1,
+        code: 200,
+        data: result
+      });
+    }
     return;
   }
   res.json({
