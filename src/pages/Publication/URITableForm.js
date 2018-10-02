@@ -26,6 +26,7 @@ export default class URITableForm extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     if ('value' in nextProps) {
+      this.index = nextProps.value ? nextProps.value.length + 1 : 0;
       this.setState({
         data: nextProps.value
       });
@@ -161,7 +162,7 @@ export default class URITableForm extends PureComponent {
               />
             );
           }
-          return text;
+          return record.uri;
         }
       },
       {
@@ -181,7 +182,7 @@ export default class URITableForm extends PureComponent {
               />
             );
           }
-          return value ? 'Yes' : 'No';
+          return record.canonical ? 'Yes' : 'No';
         }
       },
       {
