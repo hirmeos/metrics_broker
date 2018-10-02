@@ -54,7 +54,7 @@ export default class TitleTableForm extends PureComponent {
     const { data } = this.state;
     const newData = data.map(item => ({ ...item }));
     newData.push({
-      key: `NEW_TEMP_ID_${this.index}`,
+      key: `TITLE_ID_${this.index}`,
       title: '',
       editable: true,
       isNew: true

@@ -62,7 +62,7 @@ export default class URITableForm extends PureComponent {
     const { data } = this.state;
     const newData = data.map(item => ({ ...item }));
     newData.push({
-      key: `NEW_TEMP_ID_${this.index}`,
+      key: `URI_ID_${this.index}`,
       uri: '',
       canonical: false,
       editable: true,
