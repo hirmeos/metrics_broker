@@ -18,6 +18,7 @@ export default class TitleTableForm extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     if ('value' in nextProps) {
+      this.index = nextProps.value ? nextProps.value.length + 1 : 0;
       this.setState({
         data: nextProps.value
       });
@@ -53,7 +54,7 @@ export default class TitleTableForm extends PureComponent {
     const { data } = this.state;
     const newData = data.map(item => ({ ...item }));
     newData.push({
-      key: `NEW_TEMP_ID_${this.index}`,
+      key: `TITLE_ID_${this.index}`,
       title: '',
       editable: true,
       isNew: true
@@ -151,7 +152,7 @@ export default class TitleTableForm extends PureComponent {
               />
             );
           }
-          return text;
+          return record.title;
         }
       },
       {

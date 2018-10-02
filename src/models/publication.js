@@ -1,6 +1,6 @@
 import { routerRedux } from 'dva/router';
 import { message } from 'antd';
-import { addWork, getWorks } from '../services/api';
+import { addWork, editWork, getWorks } from '../services/api';
 
 export default {
   namespace: 'publication',
@@ -17,11 +17,22 @@ export default {
         yield put(routerRedux.replace('/publications/list'));
       }
     },
+    *submitEditForm({ payload }, { call, put }) {
+      const response = yield call(editWork, payload);
+      if (response !== undefined && response.status === 'ok') {
+        message.success('Publication saved successfully.');
+        yield put(routerRedux.replace('/publications/list'));
+      }
+    },
     *fetch({ payload }, { call, put }) {
       const response = yield call(getWorks, payload);
       yield put({
         type: 'queryList',
-        payload: Array.isArray(response.data) ? response.data : []
+        payload: Array.isArray(response.data)
+          ? response.data.length === 1
+            ? response.data[0]
+            : response.data
+          : []
       });
     }
   },
@@ -31,6 +42,11 @@ export default {
       return {
         ...state,
         publication: action.payload
+      };
+    },
+    clear() {
+      return {
+        publication: []
       };
     }
   }
