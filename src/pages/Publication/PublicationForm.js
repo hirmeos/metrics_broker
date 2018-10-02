@@ -1,11 +1,13 @@
 import React, { PureComponent } from 'react';
-import { Card, Button, Form, Icon, Select, Popover } from 'antd';
+import { Card, Button, Form, Icon, Select, Popover, message } from 'antd';
+import router from 'umi/router';
 import { connect } from 'dva';
 import FooterToolbar from '@/components/FooterToolbar';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import styles from './style.less';
 import URITableForm from './URITableForm';
 import TitleTableForm from './TitleTableForm';
+import { getLastPart, isUuid } from '@/utils/utils';
 
 const { Option } = Select;
 
@@ -21,12 +23,16 @@ const fieldRules = {
   uri: [{ required: true, message: 'Please enter at least one URI' }]
 };
 
-@connect(({ workType, loading }) => ({
+@connect(({ workType, publication, loading }) => ({
   workType,
+  publication,
+  loading: loading.models.publication,
   submitting: loading.effects['publication/submitAddForm']
 }))
 @Form.create()
-class AddPublicationForm extends PureComponent {
+class PublicationForm extends PureComponent {
+  formAction = 'add';
+
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
@@ -36,11 +42,25 @@ class AddPublicationForm extends PureComponent {
         order: 'asc'
       }
     });
+    const part = getLastPart();
+    if (isUuid(part)) {
+      this.formAction = 'edit';
+      dispatch({
+        type: 'publication/fetch',
+        payload: {
+          uuid: part
+        }
+      });
+    } else if (!isUuid(part) && part !== 'add' && part !== '') {
+      message.error('You must provide a work UUID.');
+      router.push('/publications/list');
+    }
   }
 
   render() {
     const {
       workType: { workType },
+      publication: { publication },
       form,
       dispatch,
       submitting
@@ -109,6 +129,7 @@ class AddPublicationForm extends PureComponent {
       );
     };
     const typeSelect = getFieldDecorator('type', {
+      initialValue: publication.type,
       rules: fieldRules.type
     })(
       <Select placeholder="Please choose publication type">
@@ -124,10 +145,36 @@ class AddPublicationForm extends PureComponent {
       </Select>
     );
 
+    const pageTitle =
+      this.formAction === 'add' ? 'New Publication' : 'Edit Publication';
+    const pageDescription =
+      this.formAction === 'add'
+        ? 'Add a new publication and its URIs.'
+        : 'Edit a publication and its URIs.';
+
+    const titles = publication.title
+      ? publication.title.map((val, key) => ({
+          editable: false,
+          isNew: false,
+          key: `NEW_TEMP_ID_${key + 1}`,
+          title: val
+        }))
+      : [];
+
+    const uris = publication.URI
+      ? publication.URI.map((val, key) => ({
+          editable: false,
+          isNew: false,
+          key: `NEW_TEMP_ID_${key + 1}`,
+          uri: val.URI,
+          canonical: val.canonical
+        }))
+      : [];
+
     return (
       <PageHeaderLayout
-        title="New Publication"
-        content="Add a new publication and its URIs."
+        title={pageTitle}
+        content={pageDescription}
         wrapperClassName={styles.advancedForm}
       >
         <Card id="type-card" className={styles.card} bordered={false}>
@@ -139,7 +186,7 @@ class AddPublicationForm extends PureComponent {
           <Form.Item label={fieldLabels.title}>
             {getFieldDecorator('title', {
               rules: fieldRules.title,
-              initialValue: []
+              initialValue: titles
             })(<TitleTableForm />)}
           </Form.Item>
         </Card>
@@ -147,7 +194,7 @@ class AddPublicationForm extends PureComponent {
           <Form.Item label={fieldLabels.uri}>
             {getFieldDecorator('uri', {
               rules: fieldRules.uri,
-              initialValue: []
+              initialValue: uris
             })(<URITableForm />)}
           </Form.Item>
         </Card>
@@ -159,7 +206,7 @@ class AddPublicationForm extends PureComponent {
             onClick={validate}
             loading={submitting}
           >
-            Submit
+            Save
           </Button>
         </FooterToolbar>
       </PageHeaderLayout>
@@ -167,4 +214,4 @@ class AddPublicationForm extends PureComponent {
   }
 }
 
-export default AddPublicationForm;
+export default PublicationForm;
