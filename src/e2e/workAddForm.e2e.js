@@ -78,45 +78,6 @@ describe('Work Add Form', () => {
     expect(text).toContain('>Yes</td>');
   });
 
-  it('should add multiple titles', async () => {
-    await page.waitForSelector('#title-card');
-    await page.waitForSelector('#new-title-btn');
-    await page.click('#new-title-btn');
-    await page.waitForSelector('#title-TITLE_ID_0');
-    await page.type('#title-TITLE_ID_0', 'New book title 1');
-    await page.click('#save-title-btn-TITLE_ID_0');
-    await page.waitForSelector('#edit-title-btn-TITLE_ID_0');
-    await page.click('#new-title-btn');
-    await page.waitForSelector('#title-TITLE_ID_1');
-    await page.type('#title-TITLE_ID_1', 'New book title 2');
-    await page.click('#save-title-btn-TITLE_ID_1');
-    await page.waitForSelector('#edit-title-btn-TITLE_ID_1');
-    const text = await page.evaluate(() => document.body.innerHTML);
-    expect(text).toContain('New book title 1</td>');
-    expect(text).toContain('New book title 2</td>');
-  });
-
-  it('should add multiple uris', async () => {
-    await page.waitForSelector('#uri-card');
-    await page.waitForSelector('#new-uri-btn');
-    await page.click('#new-uri-btn');
-    await page.waitForSelector('#uri-URI_ID_0');
-    await page.type('#uri-URI_ID_0', 'info:doi:10.11647/obp.0001');
-    await page.click('#save-uri-btn-URI_ID_0');
-    await page.waitForSelector('#edit-uri-btn-URI_ID_0');
-    await page.click('#new-uri-btn');
-    await page.waitForSelector('#uri-URI_ID_1');
-    await page.type('#uri-URI_ID_1', 'info:doi:10.11647/obp.0002');
-    await page.click('#uri-canonical-URI_ID_1');
-    await page.click('#save-uri-btn-URI_ID_1');
-    await page.waitForSelector('#edit-uri-btn-URI_ID_1');
-    const text = await page.evaluate(() => document.body.innerHTML);
-    expect(text).toContain('info:doi:10.11647/obp.0001');
-    expect(text).toContain('info:doi:10.11647/obp.0001');
-    expect(text).toContain('>No</td>');
-    expect(text).toContain('>Yes</td>');
-  });
-
   it('should not submit empty form', async () => {
     await page.waitForSelector('#form-submit-btn');
     await page.click('#form-submit-btn');
