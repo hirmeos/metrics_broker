@@ -10,11 +10,7 @@ describe('Work Add Form', () => {
   const token = fakeToken();
 
   beforeAll(async () => {
-    browser = await puppeteer.launch({
-      headless: false,
-      slowMo: 80,
-      args: ['--no-sandbox']
-    });
+    browser = await puppeteer.launch({ args: ['--no-sandbox'] });
   });
 
   beforeEach(async () => {
