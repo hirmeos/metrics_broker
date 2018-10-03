@@ -1,6 +1,6 @@
 {
   "name": "metrics_broker",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A dashboard to control metrics drivers",
   "author": "Javier Arias",
   "private": true,
