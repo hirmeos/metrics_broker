@@ -80,15 +80,6 @@ describe('Work Add Form', () => {
     expect(text).toContain('info:doi:10.11647/obp.0001');
   });
 
-  it('should delete uri', async () => {
-    await page.waitForSelector('#delete-uri-btn-URI_ID_7');
-    await page.click('#delete-uri-btn-URI_ID_7');
-    await page.waitForSelector('.ant-btn.ant-btn-primary.ant-btn-sm');
-    await page.click('.ant-btn.ant-btn-primary.ant-btn-sm');
-    const text = await page.evaluate(() => document.body.innerHTML);
-    expect(text).not.toContain('urn:isbn:9781783741564');
-  });
-
   it('should edit canonical uri', async () => {
     await page.waitForSelector('#uri-card');
     await page.waitForSelector('#edit-uri-btn-URI_ID_2');
