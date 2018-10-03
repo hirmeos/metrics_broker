@@ -178,7 +178,7 @@ export default class TitleTableForm extends PureComponent {
                     title="Are you sure you want to delete this title?"
                     onConfirm={() => this.remove(record.key)}
                   >
-                    <a>Delete</a>
+                    <a id={`delete-title-btn-${record.key}`}>Delete</a>
                   </Popconfirm>
                 </span>
               );
@@ -209,7 +209,7 @@ export default class TitleTableForm extends PureComponent {
                 title="Are you sure you want to delete this entry?？"
                 onConfirm={() => this.remove(record.key)}
               >
-                <a>Delete</a>
+                <a id={`delete-title-btn-${record.key}`}>Delete</a>
               </Popconfirm>
             </span>
           );

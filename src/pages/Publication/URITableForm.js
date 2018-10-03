@@ -208,7 +208,7 @@ export default class URITableForm extends PureComponent {
                     title="Are you sure you want to delete this URI?"
                     onConfirm={() => this.remove(record.key)}
                   >
-                    <a>Delete</a>
+                    <a id={`delete-uri-btn-${record.key}`}>Delete</a>
                   </Popconfirm>
                 </span>
               );
@@ -239,7 +239,7 @@ export default class URITableForm extends PureComponent {
                 title="Are you sure you want to delete this URI?"
                 onConfirm={() => this.remove(record.key)}
               >
-                <a>Delete</a>
+                <a id={`delete-uri-btn-${record.key}`}>Delete</a>
               </Popconfirm>
             </span>
           );
