@@ -276,7 +276,12 @@ class PublicationList extends Component {
         key: 'action',
         render: (text, record) => (
           <span>
-            <a href={`/publications/edit/${record.UUID}`}>Edit</a>
+            <a
+              id={`edit-btn-${record.UUID}`}
+              href={`/publications/edit/${record.UUID}`}
+            >
+              Edit
+            </a>
           </span>
         )
       }
