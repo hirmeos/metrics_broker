@@ -26,6 +26,7 @@ export default class URITableForm extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     if ('value' in nextProps) {
+      this.index = nextProps.value ? nextProps.value.length : 0;
       this.setState({
         data: nextProps.value
       });
@@ -61,8 +62,8 @@ export default class URITableForm extends PureComponent {
     const { data } = this.state;
     const newData = data.map(item => ({ ...item }));
     newData.push({
-      key: `NEW_TEMP_ID_${this.index}`,
-      title: '',
+      key: `URI_ID_${this.index}`,
+      uri: '',
       canonical: false,
       editable: true,
       isNew: true
@@ -107,8 +108,8 @@ export default class URITableForm extends PureComponent {
         return;
       }
       const target = this.getRowByKey(key) || {};
-      if (!target.title) {
-        message.error('Please complete the titles section');
+      if (!target.uri) {
+        message.error('Please complete the URIs section');
         e.target.focus();
         this.setState({
           loading: false
@@ -145,22 +146,23 @@ export default class URITableForm extends PureComponent {
     const columns = [
       {
         title: 'URI',
-        dataIndex: 'title',
-        key: 'title',
+        dataIndex: 'uri',
+        key: 'uri',
         width: '80%',
         render: (text, record) => {
           if (record.editable) {
             return (
               <Input
+                id={`uri-${record.key}`}
                 value={text}
                 autoFocus
-                onChange={e => this.handleFieldChange(e, 'title', record.key)}
+                onChange={e => this.handleFieldChange(e, 'uri', record.key)}
                 onKeyPress={e => this.handleKeyPress(e, record.key)}
                 placeholder="URI"
               />
             );
           }
-          return text;
+          return record.uri;
         }
       },
       {
@@ -171,6 +173,8 @@ export default class URITableForm extends PureComponent {
           if (record.editable) {
             return (
               <Checkbox
+                id={`uri-canonical-${record.key}`}
+                checked={record.canonical}
                 value={value}
                 onChange={e =>
                   this.handleFieldChange(e, 'canonical', record.key)
@@ -178,7 +182,7 @@ export default class URITableForm extends PureComponent {
               />
             );
           }
-          return value ? 'Yes' : 'No';
+          return record.canonical ? 'Yes' : 'No';
         }
       },
       {
@@ -193,20 +197,30 @@ export default class URITableForm extends PureComponent {
             if (record.isNew) {
               return (
                 <span>
-                  <a onClick={e => this.saveRow(e, record.key)}>Save</a>
+                  <a
+                    onClick={e => this.saveRow(e, record.key)}
+                    id={`save-uri-btn-${record.key}`}
+                  >
+                    Save
+                  </a>
                   <Divider type="vertical" />
                   <Popconfirm
-                    title="Are you sure you want to delete this title?"
+                    title="Are you sure you want to delete this URI?"
                     onConfirm={() => this.remove(record.key)}
                   >
-                    <a>Delete</a>
+                    <a id={`delete-uri-btn-${record.key}`}>Delete</a>
                   </Popconfirm>
                 </span>
               );
             }
             return (
               <span>
-                <a onClick={e => this.saveRow(e, record.key)}>Save</a>
+                <a
+                  onClick={e => this.saveRow(e, record.key)}
+                  id={`save-uri-btn-${record.key}`}
+                >
+                  Save
+                </a>
                 <Divider type="vertical" />
                 <a onClick={e => this.cancel(e, record.key)}>Cancel</a>
               </span>
@@ -214,13 +228,18 @@ export default class URITableForm extends PureComponent {
           }
           return (
             <span>
-              <a onClick={e => this.toggleEditable(e, record.key)}>Edit</a>
+              <a
+                onClick={e => this.toggleEditable(e, record.key)}
+                id={`edit-uri-btn-${record.key}`}
+              >
+                Edit
+              </a>
               <Divider type="vertical" />
               <Popconfirm
-                title="Are you sure you want to delete this entry?？"
+                title="Are you sure you want to delete this URI?"
                 onConfirm={() => this.remove(record.key)}
               >
-                <a>Delete</a>
+                <a id={`delete-uri-btn-${record.key}`}>Delete</a>
               </Popconfirm>
             </span>
           );
@@ -242,6 +261,7 @@ export default class URITableForm extends PureComponent {
           }}
         />
         <Button
+          id="new-uri-btn"
           style={{ width: '100%', marginTop: 16, marginBottom: 8 }}
           type="dashed"
           onClick={this.newURI}

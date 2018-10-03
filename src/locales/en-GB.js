@@ -7,6 +7,7 @@ export default {
   'menu.dashboard': 'Dashboard',
   'menu.publications': 'Publications',
   'menu.publications.add': 'Add',
+  'menu.publications.edit': 'Edit',
   'menu.publications.list': 'List',
   'driver.state.success': 'Success',
   'driver.state.error': 'Error',

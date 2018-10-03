@@ -5,7 +5,7 @@ const getFakeWorkTypes = (req, res) => {
     res.json({
       status: 'error',
       code: 403,
-      count: 1,
+      count: 0,
       data: [],
       description: '',
       message: 'You do not have permissions to access this resource.'
