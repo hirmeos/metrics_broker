@@ -48,11 +48,13 @@ describe('Work Add Form', () => {
     await page.waitForSelector('#edit-title-btn-TITLE_ID_0');
     await page.click('#edit-title-btn-TITLE_ID_0');
     await page.waitForSelector('#title-TITLE_ID_0');
+    await page.click('#title-TITLE_ID_0', { clickCount: 3 });
     await page.type('#title-TITLE_ID_0', 'Amended Book Title');
     await page.click('#save-title-btn-TITLE_ID_0');
     await page.waitForSelector('#edit-title-btn-TITLE_ID_0');
     const text = await page.evaluate(() => document.body.innerHTML);
     expect(text).toContain('Amended Book Title');
+    expect(text).not.toContain('A Musicology of Performance'); // original title
   });
 
   it('should add extra title', async () => {
