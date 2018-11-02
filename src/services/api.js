@@ -6,7 +6,7 @@ export async function getWorks(params) {
 }
 
 export async function login(params) {
-  return request(`${REACT_APP_URI_API}/auth`, {
+  return request(`${REACT_APP_AUTH_API}/tokens`, {
     method: 'POST',
     body: params
   });
@@ -35,5 +35,5 @@ export async function driverData() {
 }
 
 export async function queryCurrent(params) {
-  return request(`${REACT_APP_DRIVER_API}/auth?${stringify(params)}`);
+  return request(`${REACT_APP_AUTH_API}/tokens?${stringify(params)}`);
 }
