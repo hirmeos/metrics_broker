@@ -12,7 +12,8 @@ module.exports = {
   globals: {
     NODE_ENV: true,
     REACT_APP_URI_API: true,
-    REACT_APP_DRIVER_API: true
+    REACT_APP_DRIVER_API: true,
+    REACT_APP_AUTH_API: true
   },
   rules: {
     'generator-star-spacing': [0],
