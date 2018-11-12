@@ -14,5 +14,5 @@ cache:
     - node_modules
 script:
   - npm run lint
-  - npm run test:all
+  - travis_wait npm run test:all
   - npm run build
