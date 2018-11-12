@@ -69,7 +69,7 @@
     "umi-plugin-react": "^1.1.1"
   },
   "optionalDependencies": {
-    "puppeteer": "^1.6.0"
+    "puppeteer": "1.8.0"
   },
   "lint-staged": {
     "**/*.{js,jsx,less}": [
