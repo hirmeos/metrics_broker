@@ -54,6 +54,6 @@ const fakeCheck = (req, res) => {
 };
 
 export default {
-  'POST /auth': fakeAuth,
-  'GET /auth': fakeCheck
+  'POST /tokens': fakeAuth,
+  'GET /tokens': fakeCheck
 };

@@ -38,6 +38,12 @@ export default {
         ? process.env.REACT_APP_DRIVER_API
         : process.env.NODE_ENV === 'testing'
           ? 'http://localhost:8000'
+          : '',
+    REACT_APP_AUTH_API:
+      process.env.NODE_ENV === 'production'
+        ? process.env.REACT_APP_AUTH_API
+        : process.env.NODE_ENV === 'testing'
+          ? 'http://localhost:8000'
           : ''
   },
   routes: pageRoutes,
